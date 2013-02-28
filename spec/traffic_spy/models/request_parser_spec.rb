@@ -44,7 +44,7 @@ module TrafficSpy
           "ip" => "63.29.38.211" }.to_json
 
           request = RequestParser.parse(input)
-          expect(request.url).to eq "http://jumpstartlab.com/blog"
+          expect(RequestParser.url).to eq "http://jumpstartlab.com/blog"
       end
     end
   end
