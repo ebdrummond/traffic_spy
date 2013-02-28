@@ -29,7 +29,7 @@ module TrafficSpy
           expect(RequestParser.parse_json(input)).to be_a_kind_of (Hash)
         end        
 
-      it "stores the variables for the parsed json hash" do
+      it "stores the url variable for the parsed json hash" do
         input = {
           "url" => "http://jumpstartlab.com/blog",
           "requestedAt" => "2013-02-16 21:38:28 -0700",
@@ -43,8 +43,10 @@ module TrafficSpy
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211" }.to_json
 
-          request = RequestParser.parse(input)
-          expect(RequestParser.url).to eq "http://jumpstartlab.com/blog"
+          data = RequestParser.parse_json(input)
+          request = RequestParser.new
+          parsed_data = request.parse(data)
+          expect(parsed_data.url).to eq "http://jumpstartlab.com/blog"
       end
     end
   end

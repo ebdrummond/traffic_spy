@@ -1,7 +1,7 @@
 require 'json'
 
 module TrafficSpy
-  module RequestParser
+  class RequestParser
 
     attr_reader :url,
                 :requested_at,
@@ -15,14 +15,16 @@ module TrafficSpy
                 :resolution_height,
                 :ip_address
 
-    def self.parse(input)
-      request_hash = parse_json(input)
-      @url = request_hash["url"]
+    def parse(input)
+      # request_hash = RequestParser.parse_json(input)
+      @url = input["url"]
     end
 
     def self.parse_json(input)
       JSON.parse(input)
     end
+
+
   end
 end
 
