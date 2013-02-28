@@ -21,8 +21,16 @@ module TrafficSpy
 
     def initialize(input)
       @url = input["url"]
+      @requested_at = input["requestedAt"]
+      @responded_in = input["respondedIn"]
+      @referred_by = input["referredBy"]
+      @parameters = input["parameters"]
+      @event_name = input["eventName"]
+      @user_agent = input["userAgent"]
+      @resolution_width = input["resolutionWidth"]
+      @resolution_height = input["resolutionHeight"]
+      @ip_address = input["ip"]
     end
-
   end
 end
 
