@@ -1,4 +1,4 @@
-require 'traffic_spy/version'
+ require 'traffic_spy/version'
 require 'sinatra'
 
 module TrafficSpy

@@ -1,19 +1,33 @@
 require 'json'
 
 module TrafficSpy
-  module RequestParser
+  class RequestParser
+
+    attr_reader :url,
+                :requested_at,
+                :responded_in,
+                :referred_by,
+                :request_type,
+                :parameters,
+                :event_name,
+                :user_agent,
+                :resolution_width,
+                :resolution_height,
+                :ip_address
+
     def self.parse(input)
-          "url" => "http://jumpstartlab.com/blog",
-          "requestedAt" => "2013-02-16 21:38:28 -0700",
-          "respondedIn" => 37,
-          "referredBy" => "http://jumpstartlab.com",
-          "requestType" => "GET",
-          "parameters" => [],
-          "eventName" => "socialLogin",
-          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
-          "resolutionWidth" => "1920",
-          "resolutionHeight" => "1280",
-          "ip" => "63.29.38.211"
+      request_hash = parse_json(input)
+      @url = request_hash["url"]
+      @requested_at = request_hash["requested_at"]
+      @responded_in = request_hash["responded_in"]
+      @referred_by = request_hash["referred_by"]
+      @request_type = request_hash["request_type"]
+      @parameters = request_hash["parameters"]
+      @event_name = request_hash["event_name"]
+      @user_agent = request_hash["user_agent"]
+      @resolution_width = request_hash["resolution_width"]
+      @resolution_height = request_hash["resolution_height"]
+      @ip_address = request_hash["ip_address"]
     end
 
     def self.parse_json(input)
