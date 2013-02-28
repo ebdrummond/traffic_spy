@@ -8,6 +8,10 @@ group :development do
   gem 'rspec'
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9'
+  gem 'pg'
+  gem 'sqlite3'
+  gem 'sequel'
+  gem 'sinatra'
 end
 
 group :evaluations do
