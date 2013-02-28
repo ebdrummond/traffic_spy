@@ -15,15 +15,13 @@ module TrafficSpy
                 :resolution_height,
                 :ip_address
 
-    def parse(input)
-      # request_hash = RequestParser.parse_json(input)
-      @url = input["url"]
-    end
-
     def self.parse_json(input)
       JSON.parse(input)
     end
 
+    def initialize(input)
+      @url = input["url"]
+    end
 
   end
 end
