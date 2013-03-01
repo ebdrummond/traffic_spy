@@ -1,9 +1,9 @@
 module TrafficSpy
-  class Url
-    attr_reader :url
+  class Event
+    attr_reader :event
 
     def initialize(input)
-      @url = input
+      @event = input
     end
   end
 end
