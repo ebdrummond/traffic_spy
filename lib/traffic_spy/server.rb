@@ -1,3 +1,5 @@
+require 'sinatra'
+
 module TrafficSpy
 
   # Sinatra::Base - Middleware, Libraries, and Modular Apps
@@ -17,10 +19,9 @@ module TrafficSpy
       erb :index
     end
 
-    post '/sources/:source_id/data' do
-      # payload = RequestParser.parse(params)
-      # payload.url
-
+    post '/sources/:identifier/data' do
+      payload = PayloadParser.parse(params)
+      payload.url
     end
 
     not_found do
