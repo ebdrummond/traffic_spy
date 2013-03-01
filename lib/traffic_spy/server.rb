@@ -17,6 +17,12 @@ module TrafficSpy
       erb :index
     end
 
+    post '/sources/:source_id/data' do
+      # payload = RequestParser.parse(params)
+      # payload.url
+
+    end
+
     not_found do
       erb :error
     end

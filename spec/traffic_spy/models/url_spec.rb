@@ -10,8 +10,5 @@ module TrafficSpy
       instance = Url.new("http://jumpstartlab.com/blog")
       expect(instance.url).to eq "http://jumpstartlab.com/blog"
     end
-
   end
-
-
 end
