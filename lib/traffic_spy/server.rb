@@ -12,8 +12,8 @@ module TrafficSpy
   # ./public and ./views directories, logging, exception detail page, etc.).
   # That's where Sinatra::Base comes into play:
   #
-  class Server < Sinatra::Base
-    set :views, 'lib/views'
+  class Server #< Sinatra::Base
+    set :views, '../views'
 
     get '/' do
       erb :index
