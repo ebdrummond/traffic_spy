@@ -12,10 +12,12 @@ module TrafficSpy
   # ./public and ./views directories, logging, exception detail page, etc.).
   # That's where Sinatra::Base comes into play:
   #
-  class Server < Sinatra::Base
-    set :views, 'lib/views'
+  class Server# < Sinatra::Base
+    set :views, '../views'
+    set :public, '../public'
 
     get '/' do
+      #'hello'
       erb :index
     end
 
@@ -23,6 +25,16 @@ module TrafficSpy
       payload = PayloadParser.parse(params)
       payload.url
     end
+
+    get '/sources/:identifier' do
+      erb :sources, :locals => {:identifier => params[:identifier]}
+    end
+
+    get '/sources/:identifier/urls/:relative/:path' do
+      erb :urls, :locals => { :identifier => params[:identifier],
+                              :relative   => params[:relative],
+                              :path       => params[:path]  }
+    end    
 
     not_found do
       erb :error
