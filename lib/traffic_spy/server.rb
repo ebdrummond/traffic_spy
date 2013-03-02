@@ -27,20 +27,30 @@ module TrafficSpy
       @rootUrl = params[:rootUrl]
       if Account.exists?(@identifier)
         @exists = true
+        status 403
+        body "Sorry, but #{@identifier} already exists in our database."
+      elsif (@identifier || @rootUrl).nil?
+        status 400
+        body "Sorry, but your request is missing required parameters.  Please try again."
       else
         @exists = false
         account = Account.new(@identifier, @rootUrl)
         account.register
+        status 200
+        body '{"identifier":"' + @identifier +'"}'
       end
-      erb :sources
     end
 
     post '/sources/:identifier/data' do
-      ruby_hash = Payload.parse(params[:payload])
-      payload = Payload.new(ruby_hash)
-
-      # payload = PayloadParser.parse(params)
-      # payload.url
+      @identifier = params[:identifier]
+      payload_ruby_hash = Payload.parse(params[:payload])
+      if Account.exists?(@identifier) && Payload.new?(payload_ruby_hash)
+        payload = Payload.new(payload_ruby_hash)
+      elsif Payload.exists?(payload) == true
+        # the payload already exists
+      else
+        # return that the account doesn't exist and they shoudl register
+      end
     end
 
     get '/sources/:identifier' do

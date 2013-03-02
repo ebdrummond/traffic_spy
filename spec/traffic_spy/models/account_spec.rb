@@ -4,7 +4,7 @@ module TrafficSpy
   describe Account do
 
     before(:each) do
-      @account = Account.new("brock", "http://jumpstartlab.com")
+      @account = Account.new("jumpstartlab", "http://jumpstartlab.com")
     end
 
     it "exists" do
