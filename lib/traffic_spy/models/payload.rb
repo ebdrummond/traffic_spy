@@ -27,21 +27,6 @@ module TrafficSpy
       @ip_address = input["ip"]
     end
 
-    # def register
-    #   DB[:payloads].insert(
-    #     :url => @url,
-    #     :requested_at => @requested_at,
-    #     :responded_in => @responded_in,
-    #     :referred_by => @referred_by,
-    #     :parameters => @parameters,
-    #     :event_name => @event_name,
-    #     :user_agent => @user_agent,
-    #     :resolution_width => @resolution_width,
-    #     :resolution_height => @resolution_height,
-    #     :ip_address => @ip_address)
-    #   return true
-    # end
-
     def self.parse(input)
       JSON.parse(input)
     end
@@ -52,6 +37,7 @@ module TrafficSpy
 
     def delegate
       # make new instances of the classes
+      make_new_objects
 
       # receive key values as return from certain classes
         # account
@@ -64,6 +50,18 @@ module TrafficSpy
         # os
 
       # return a hash of each table and corresponding value or row id
+    end
+
+    def make_new_objects
+      make_new_url_object
+    end
+
+    def make_new_url_objects
+      if Url.exists?(@url)
+        Url.get_id(@url)
+      else
+        # add a new row to the URL table
+      end
     end
 
     def register(hash_of_delegate)

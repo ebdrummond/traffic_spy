@@ -46,10 +46,15 @@ module TrafficSpy
       payload_ruby_hash = Payload.parse(params[:payload])
       if Account.exists?(@identifier) && Payload.new?(payload_ruby_hash)
         payload = Payload.new(payload_ruby_hash)
-      elsif Payload.exists?(payload) == true
-        # the payload already exists
+        payload.register
+        status 200
+        body "Thanks!  Information is available for review in your dashboard."
+      elsif Payload.new?(payload) == false
+        status 403
+        body "Sorry, but this payload already exists in our database."
       else
-        # return that the account doesn't exist and they shoudl register
+        status 400
+        body "Sorry, but your request is missing required parameters.  Please try again."
       end
     end
 
