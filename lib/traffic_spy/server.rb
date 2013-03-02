@@ -25,7 +25,6 @@ module TrafficSpy
     post '/sources' do
       @identifier = params[:identifier]
       @rootUrl = params[:rootUrl]
-      # Don't think we should create a new instance until we know it exists
       if Account.exists?(@identifier)
         @exists = true
       else

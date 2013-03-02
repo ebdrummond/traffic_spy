@@ -1,6 +1,8 @@
 module TrafficSpy
   class Account
 
+    attr_reader :identifier
+
     def initialize(identifier, root_url)
       @identifier = identifier
       @root_url = root_url
