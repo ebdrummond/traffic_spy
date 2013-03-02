@@ -11,6 +11,10 @@ module TrafficSpy
       Account.should be
     end
 
+    it "checks to see if there is already an account in the database" do
+      expect(Account.exists?(@account.identifier)).to be true
+    end
+
     it "registers a new account using the parameters from the post request" do
       expect(@account.register).to be true
     end
