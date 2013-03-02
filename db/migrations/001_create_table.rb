@@ -1,6 +1,6 @@
 Sequel.migration do
   change do
-    create_table(:requests) do
+    create_table(:payloads) do
       primary_key :id
       foreign_key :account_id
       String :http_request

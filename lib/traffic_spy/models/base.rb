@@ -6,6 +6,7 @@ require 'traffic_spy/models/operating_system'
 require 'traffic_spy/models/browser'
 require 'traffic_spy/models/resolution'
 require 'traffic_spy/models/event'
+require 'traffic_spy/models/account'
 
 module TrafficSpy
 

@@ -53,127 +53,14 @@
 
     <div id="content" class="large-10 columns">
       <div id="content-inner">
-        <%= @identifier %>
-        <div class="widget">
-          <h3>Pages</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>URL</th>
-                <th>Requests</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-            <tbody>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/ohyeah</a></td>
-                <td>100</td>
-              </tr><!-- Table Row -->
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>100</td>
-              </tr><!-- Darker Table Row -->
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/frankthetank</a></td>
-                <td>90</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/railzzz</a></td>
-                <td>80</td>
-              </tr>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/tutorialzz</a></td>
-                <td>80</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/washingtondc4lyfe</a></td>
-                <td>60</td>
-              </tr>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/boom</a></td>
-                <td>40</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/roobeee</a></td>
-                <td>20</td>
-              </tr>
-
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
-        </div>
-        <div class="widget">
-          <h3>Response Times</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>URL</th>
-                <th>Average</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-            <tbody>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/ohyeah</a></td>
-                <td>500ms</td>
-              </tr><!-- Table Row -->
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>450ms</td>
-              </tr><!-- Darker Table Row -->
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>300ms</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>200ms</td>
-              </tr>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>200ms</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>100ms</td>
-              </tr>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>75ms</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>70ms</td>
-              </tr>
-
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
-        </div>
+        <% if @exists = true %>
+          <p>It exists!</p>
+        <% elsif %>
+          <%= @identifier %>
+          <%= "thanks for registering" %>
+          <%= @rootUrl %>
+          <%= "!" %>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 require 'sinatra'
 
+
 module TrafficSpy
 
   # Sinatra::Base - Middleware, Libraries, and Modular Apps
@@ -12,9 +13,9 @@ module TrafficSpy
   # ./public and ./views directories, logging, exception detail page, etc.).
   # That's where Sinatra::Base comes into play:
   #
-  class Server# < Sinatra::Base
-    set :views, '../views'
-    set :public_folder, '../public'
+  class Server < Sinatra::Base
+    set :views, 'lib/views'
+    set :public_folder, 'lib/public'
 
     get '/' do
       #'hello'
@@ -24,6 +25,14 @@ module TrafficSpy
     post '/sources' do
       @identifier = params[:identifier]
       @rootUrl = params[:rootUrl]
+      account = Account.new(@identifier, @rootUrl)
+      if account.exists?(@identifier)
+        'it exists!'
+        @exists = true
+      else
+        'it does not exist'
+        @exists = false
+      end
       erb :sources
     end
 

@@ -1,3 +1,5 @@
+ENV["TRAFFIC_SPY_ENV"] ||= "test"
+
 require 'sinatra/base'
 require 'sequel'
 require 'traffic_spy/models/base'
