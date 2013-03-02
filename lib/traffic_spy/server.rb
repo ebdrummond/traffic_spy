@@ -25,11 +25,12 @@ module TrafficSpy
     post '/sources' do
       @identifier = params[:identifier]
       @rootUrl = params[:rootUrl]
-      account = Account.new(@identifier, @rootUrl)
-      if account.exists?(@identifier)
+      # Don't think we should create a new instance until we know it exists
+      if Account.exists?(@identifier)
         @exists = true
       else
         @exists = false
+        account = Account.new(@identifier, @rootUrl)
         account.register
       end
       erb :sources

@@ -6,7 +6,7 @@ module TrafficSpy
       @root_url = root_url
     end
 
-    def exists?(identifier)
+    def self.exists?(identifier)
       DB[:accounts].where(:identifier => identifier).to_a.count > 0
     end
 
