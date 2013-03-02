@@ -9,8 +9,8 @@ module TrafficSpy
     before(:each) do
       @payload = {
           "url" => "http://jumpstartlab.com/blog",
-          "requestedAt" => "2013-02-16 21:38:28 -0700",
-          "respondedIn" => 27,
+          "requestedAt" => "2013-02-16 21:38:26 -0700",
+          "respondedIn" => 30,
           "referredBy" => "http://jumpstartlab.com",
           "requestType" => "GET",
           "parameters" => [],
@@ -31,9 +31,9 @@ module TrafficSpy
           "ip_address_id" => 1,
           "browser_id" => 1,
           "operating_systems_id" => 1,
-          "requested_at" => "2013-02-16 21:38:28 -0700",
+          "requested_at" => "2013-02-16 21:38:26 -0700",
           "hour_of_day" => 20,
-          "responded_in" => 27
+          "responded_in" => 30
         }
     end
 
@@ -57,8 +57,8 @@ module TrafficSpy
 
     it "checks to see if the payload passed in is new" do
       payload_instance.register(@delegate_return_value)
-      puts DB[:payloads].select.to_a
-      expect(Payload.new?(@payload)).to be_false
+      parse_to_ruby = Payload.parse(@payload)
+      expect(Payload.new?(parse_to_ruby)).to be_false
     end
   end
 end

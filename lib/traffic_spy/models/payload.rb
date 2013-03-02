@@ -47,7 +47,7 @@ module TrafficSpy
     end
 
     def self.new?(payload)
-      DB[:payloads].where(:responded_in => payload["respondedIn"]).to_a.count > 0
+      DB[:payloads].where(:requested_at => payload["requestedAt"]).to_a.count < 1
     end
 
     def delegate
