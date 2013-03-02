@@ -1,4 +1,4 @@
-require 'traffic_spy/models/payload_parser'
+require 'traffic_spy/models/payload'
 require 'traffic_spy/models/url'
 require 'traffic_spy/models/referring_url'
 require 'traffic_spy/models/ip_address'

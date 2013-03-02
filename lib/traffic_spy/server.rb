@@ -14,11 +14,17 @@ module TrafficSpy
   #
   class Server# < Sinatra::Base
     set :views, '../views'
-    set :public, '../public'
+    set :public_folder, '../public'
 
     get '/' do
       #'hello'
       erb :index
+    end
+
+    post '/sources' do
+      @identifier = params[:identifier]
+      @rootUrl = params[:rootUrl]
+      erb :sources
     end
 
     post '/sources/:identifier/data' do
