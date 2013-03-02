@@ -53,9 +53,9 @@
 
     <div id="content" class="large-10 columns">
       <div id="content-inner">
-        <% if @exists = true %>
+        <% if @exists == true %>
           <p>It exists!</p>
-        <% elsif %>
+        <% else %>
           <%= @identifier %>
           <%= "thanks for registering" %>
           <%= @rootUrl %>
