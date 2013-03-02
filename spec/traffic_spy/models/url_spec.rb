@@ -28,5 +28,13 @@ module TrafficSpy
     it "returns the id of the row in the table" do
       expect(Url.get_id(@url)).to eq 1
     end
+
+    it "makes a new object with a value that already exists" do
+      expect(Url.make_new_object(@url)).to be_kind_of(Integer)
+    end
+
+    it "makes a new object with a new event" do
+      expect(Url.make_new_object("http://newurl.com")).to be_kind_of(Integer)
+    end
   end
 end
