@@ -13,6 +13,7 @@ group :development do
   gem 'sqlite3'
   gem 'sequel'
   gem 'sinatra'
+  gem 'simplecov'
 end
 
 group :evaluations do

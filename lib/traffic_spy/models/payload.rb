@@ -53,15 +53,11 @@ module TrafficSpy
     end
 
     def make_new_objects
-      make_new_url_object
+      generate_url_id
     end
 
-    def make_new_url_objects
-      if Url.exists?(@url)
-        Url.get_id(@url)
-      else
-        # add a new row to the URL table
-      end
+    def generate_url_id
+      Url.make_new_object(@url)
     end
 
     def register(hash_of_delegate)

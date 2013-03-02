@@ -8,7 +8,7 @@ module TrafficSpy
     let (:payload_instance) { Payload.new (@payload) }
     before(:each) do
       @payload = {
-          "url" => "http://jumpstartlab.com/blog",
+          "url" => "http://jumpstartlab.com",
           "requestedAt" => "2013-02-16 21:38:26 -0700",
           "respondedIn" => 30,
           "referredBy" => "http://jumpstartlab.com",
@@ -52,13 +52,19 @@ module TrafficSpy
     it "stores the parsed JSON into class instance variables" do
       parse_to_ruby = Payload.parse(@payload)
       payload = Payload.new(parse_to_ruby)
-      expect(payload.url).to eq "http://jumpstartlab.com/blog"
+      expect(payload.url).to eq "http://jumpstartlab.com"
     end
 
     it "checks to see if the payload passed in is new" do
       payload_instance.register(@delegate_return_value)
       parse_to_ruby = Payload.parse(@payload)
       expect(Payload.new?(parse_to_ruby)).to be_false
+    end
+
+    it "creates a new URL object" do
+      parse_to_ruby = Payload.parse(@payload)
+      payload = Payload.new(parse_to_ruby)
+      expect(payload.generate_url_id).to eq 1
     end
   end
 end
