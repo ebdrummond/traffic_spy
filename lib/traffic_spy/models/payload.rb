@@ -27,6 +27,21 @@ module TrafficSpy
       @ip_address = input["ip"]
     end
 
+    def register
+      DB[:payloads].insert(
+        :url => @url,
+        :requested_at => @requested_at,
+        :responded_in => @responded_in,
+        :referred_by => @referred_by,
+        :parameters => @parameters,
+        :event_name => @event_name,
+        :user_agent => @user_agent,
+        :resolution_width => @resolution_width,
+        :resolution_height => @resolution_height,
+        :ip_address => @ip_address)
+      return true
+    end
+
     def self.parse(input)
       JSON.parse(input)
     end

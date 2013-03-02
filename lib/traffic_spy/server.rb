@@ -36,8 +36,11 @@ module TrafficSpy
     end
 
     post '/sources/:identifier/data' do
-      payload = PayloadParser.parse(params)
-      payload.url
+      ruby_hash = Payload.parse(params[:payload])
+      payload = Payload.new(ruby_hash)
+
+      # payload = PayloadParser.parse(params)
+      # payload.url
     end
 
     get '/sources/:identifier' do
