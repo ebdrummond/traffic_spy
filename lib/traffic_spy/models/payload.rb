@@ -35,6 +35,10 @@ module TrafficSpy
       DB[:payloads].where(:requested_at => payload["requestedAt"]).to_a.count < 1
     end
 
+    def combine_resolutions(width, height)
+      "#{@resolution_width} x #{@resolution_height}"
+    end
+
     def delegate
       # make new instances of the classes
       make_new_objects
