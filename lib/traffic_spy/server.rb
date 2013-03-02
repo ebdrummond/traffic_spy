@@ -27,11 +27,10 @@ module TrafficSpy
       @rootUrl = params[:rootUrl]
       account = Account.new(@identifier, @rootUrl)
       if account.exists?(@identifier)
-        'it exists!'
         @exists = true
       else
-        'it does not exist'
         @exists = false
+        account.register
       end
       erb :sources
     end
@@ -55,5 +54,4 @@ module TrafficSpy
       erb :error
     end
   end
-
 end

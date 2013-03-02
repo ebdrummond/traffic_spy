@@ -10,11 +10,10 @@ module TrafficSpy
       DB[:accounts].where(:identifier => identifier).to_a.count > 0
     end
 
-    def register(params)
+    def register
       DB[:accounts].insert(
-        :id => params[:id],
-        :identifier => params[:identifier],
-        :root_url => params[:rootUrl])
+        :identifier => @identifier,
+        :root_url => @root_url)
       return true
     end
   end
