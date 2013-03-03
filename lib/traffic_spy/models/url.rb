@@ -31,18 +31,18 @@ module TrafficSpy
     end
 
     def self.all_urls(identifier)
-      # DB[:urls].join(:url, )
-      # DB[:urls].select
-      # Get the account ID number for below
+      urls = DB[:urls]
+      payloads = DB[:payloads]
+      accounts = DB[:accounts]
 
-      # Gives us an array of the payload mixed w/ url for a specific account
-      our_join = urls.join(:payloads, :url_id => :id)
-      our_join.to_a
-      our_join.where(:account_id => 1)
-      new_join = our_join.where(:account_id => 1)
-      new_join.to_a
-      # sort the current array or query by quantity of appearances of an url id
-      new_join.order(:)
+      something = Hash.new{0}
+      url_ids_by_count = payloads.join(:urls, :id => :url_id).group_and_count(:url_id)
+      url_ids_by_count.each do |url|
+        url_id = url[:url_id]
+        actual_url_query = DB[:urls].where(:id => url_id)
+        actual_url = actual_url_query[:url].to_a
+        something[url] += url[:count]
+      end      
     end
 
     def self.url_sort

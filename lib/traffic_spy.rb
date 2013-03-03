@@ -15,7 +15,7 @@ require "traffic_spy/version"
 
 # DB = Sequel.postgres("traffic_spy")
 
-# curl -i -d 'payload={"url":"http://erin.com","requestedAt":"2009-03-02 03:38:28 -0700","respondedIn":47,
+# curl -i -d 'payload={"url":"http://kyle.com/2","requestedAt":"1997-03-02 03:38:28 -0700","respondedIn":47,
 #   "referredBy":"http://kyle.com/blog",
 #   "requestType":"GET",
 #   "parameters":[],
