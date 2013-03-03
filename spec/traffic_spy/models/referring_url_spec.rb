@@ -30,7 +30,7 @@ module TrafficSpy
     end
 
     it "returns the id of the row in the table" do
-      expect(ReferringUrl.get_id(@referring_url)).to eq 1
+      expect(ReferringUrl.get_id(@referring_url)).to be_kind_of(Integer)
     end
   end
 end

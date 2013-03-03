@@ -59,7 +59,7 @@ module TrafficSpy
     end
 
     def generate_account_id
-      Account.make_new_object(@identifier)
+      Account.get_id(@identifier)
     end
 
     def generate_url_id

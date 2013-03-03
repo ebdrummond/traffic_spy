@@ -26,7 +26,7 @@ module TrafficSpy
     end
 
     it "returns the id of the row in the table" do
-      expect(Url.get_id(@url)).to eq 1
+      expect(Url.get_id(@url)).to be_kind_of(Integer)
     end
 
     it "makes a new object with a value that already exists" do
@@ -35,6 +35,10 @@ module TrafficSpy
 
     it "makes a new object with a new url" do
       expect(Url.make_new_object("http://newurl.com")).to be_kind_of(Integer)
+    end
+
+    it "returns urls sorted by top visited urls" do
+      expect(Url.sorted_urls("jumpstartlab")).to be_kind_of(Hash)
     end
   end
 end

@@ -30,13 +30,13 @@ module TrafficSpy
       return true
     end
 
-    def self.all_urls(identifier)
+    def self.sorted_urls(identifier)
       urls = DB[:urls]
       payloads = DB[:payloads]
-      accounts = DB[:accounts]
+      account_id = Account.get_id(identifier)
 
       url_sorted_hash = Hash.new{0}
-      url_ids_by_count = payloads.join(:urls, :id => :url_id).group_and_count(:url_id).order(Sequel.desc(:count))
+      url_ids_by_count = payloads.where(:account_id => account_id).join(:urls, :id => :url_id).group_and_count(:url_id).order(Sequel.desc(:count))
       url_ids_by_count.to_a.each do |url_row|
         url_id = url_row[:url_id]
         actual_url_query = DB[:urls].where(:id => url_id).to_a
@@ -44,10 +44,6 @@ module TrafficSpy
         url_sorted_hash[actual_url] += url_row[:count]
       end
       url_sorted_hash
-    end
-
-    def self.url_sort
-
     end
   end
 end

@@ -62,6 +62,7 @@ module TrafficSpy
 
     get '/sources/:identifier' do
       @identifier = params[:identifier]
+      @sorted_urls = Url.sorted_urls(@identifier)
       erb :sources
     end
 
