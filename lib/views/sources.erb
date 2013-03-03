@@ -69,46 +69,10 @@
             <tbody>
               <% @sorted_urls.each do |url, count| %>
               <tr>
-                <td><a href="#"><%= url %></a></td>
+                <td><a href="/sources/<%= @identifier %>/urls"><%= url %></a></td>
                 <td><%= count %></td>
               </tr><!-- Table Row -->
               <% end %>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>100</td>
-              </tr><!-- Darker Table Row -->
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/frankthetank</a></td>
-                <td>90</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/railzzz</a></td>
-                <td>80</td>
-              </tr>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/tutorialzz</a></td>
-                <td>80</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/washingtondc4lyfe</a></td>
-                <td>60</td>
-              </tr>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/boom</a></td>
-                <td>40</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/roobeee</a></td>
-                <td>20</td>
-              </tr>
-
             </tbody>
             <!-- Table Body -->
 
