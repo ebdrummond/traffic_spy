@@ -43,14 +43,14 @@ module TrafficSpy
 
     post '/sources/:identifier/data' do
       @identifier = params[:identifier]
+      Payload.parse(params[:payload]).to_s
       payload_ruby_hash = Payload.parse(params[:payload])
       if Account.exists?(@identifier) && Payload.new?(payload_ruby_hash)
         payload = Payload.new(payload_ruby_hash, @identifier)
-        delegated_hash = payload.delegate
-        payload.register(delegated_hash)
+        payload.register
         status 200
         body "Thanks!  Information is available for review in your dashboard."
-      elsif Payload.new?(payload) == false
+      elsif Account.exists?(@identifier) && Payload.new?(payload_ruby_hash) == false
         status 403
         body "Sorry, but this payload already exists in our database."
       else

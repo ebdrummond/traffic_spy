@@ -41,29 +41,10 @@ module TrafficSpy
       DB[:payloads].where(:requested_at => payload["requestedAt"]).to_a.count < 1
     end
 
-    def delegate
-      parse_payload_further
-      payload_db_row = {
-      "account_id" => generate_account_id,
-      "http_request" => @request_type,
-      "query_strings" => @parameters,
-      "url_id" => generate_url_id,
-      "referrer_id" => generate_referring_url_id,
-      "event_id" => generate_event_id,
-      "resolution_id" => generate_resolution_id,
-      "ip_address_id" => generate_ip_address_id,
-      "browser_id" => generate_browser_id,
-      "operating_system_id" => generate_operating_system_id,
-      "requested_at" => @requested_at,
-      "hour_of_day" => @hour_of_day,
-      "responded_in" => @responded_in
-      }
-    end
-
     def parse_payload_further
       @resolution = Resolution.combine_resolutions(@resolution_width, @resolution_height)
       user_agent = AgentOrange::UserAgent.new(@user_agent)
-      @browser = user_agent.device.engine.browser
+      @browser = user_agent.device.engine.browser.name
       @operating_system = user_agent.device.operating_system.name
       @hour_of_day = get_hour_of_day
     end
@@ -105,21 +86,23 @@ module TrafficSpy
       OperatingSystem.make_new_object(@operating_system)
     end
 
-    def register(hash_of_delegate)
+    def register
+      parse_payload_further
+
       DB[:payloads].insert(
-      :account_id => hash_of_delegate["account_id"],
-      :http_request => hash_of_delegate["http_request"],
-      :query_strings => hash_of_delegate["query_strings"],
-      :url_id => hash_of_delegate["url_id"],
-      :referrer_id => hash_of_delegate["referrer_id"],
-      :event_id => hash_of_delegate["event_id"],
-      :resolution_id => hash_of_delegate["resolution_id"],
-      :ip_address_id => hash_of_delegate["ip_address_id"],
-      :browser_id => hash_of_delegate["browser_id"],
-      :operating_system_id => hash_of_delegate["operating_system_id"],
-      :requested_at => hash_of_delegate["requested_at"],
-      :hour_of_day => hash_of_delegate["hour_of_day"],
-      :responded_in => hash_of_delegate["responded_in"])
+      :account_id => generate_account_id,
+      :http_request => @http_request,
+      :query_strings => @query_strings,
+      :url_id => generate_url_id,
+      :referrer_id => generate_referring_url_id,
+      :event_id => generate_event_id,
+      :resolution_id => generate_resolution_id,
+      :ip_address_id => generate_ip_address_id,
+      :browser_id => generate_browser_id,
+      :operating_system_id => generate_operating_system_id,
+      :requested_at => @requested_at,
+      :hour_of_day => get_hour_of_day,
+      :responded_in => @responded_in)
       return true
     end
   end

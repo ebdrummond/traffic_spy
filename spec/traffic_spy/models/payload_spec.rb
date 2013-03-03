@@ -5,7 +5,7 @@ module TrafficSpy
     it "exists" do
       Payload.should be
     end
-    
+
     let (:payload_instance) { Payload.new(@payload, "jumpstartlab") }
     before(:each) do
       @payload = {
@@ -22,21 +22,21 @@ module TrafficSpy
           "ip" => "63.29.38.211" 
         }.to_json
 
-      @delegate_return_value = {
-        "account_id" => 1,
-        "http_request" => "get",
-        "query_strings" => "[]",
-        "url_id" => 1,
-        "referrer_id" => 1,
-        "event_id" => 1,
-        "resolution_id" => 1,
-        "ip_address_id" => 1,
-        "browser_id" => 1,
-        "operating_systems_id" => 1,
-        "requested_at" => "2013-02-16 21:38:26 -0700",
-        "hour_of_day" => "21",
-        "responded_in" => 30
-        }
+      # @delegate_return_value = {
+      #   "account_id" => 1,
+      #   "http_request" => "get",
+      #   "query_strings" => "[]",
+      #   "url_id" => 1,
+      #   "referrer_id" => 1,
+      #   "event_id" => 1,
+      #   "resolution_id" => 1,
+      #   "ip_address_id" => 1,
+      #   "browser_id" => 1,
+      #   "operating_systems_id" => 1,
+      #   "requested_at" => "2013-02-16 21:38:26 -0700",
+      #   "hour_of_day" => "21",
+      #   "responded_in" => 30
+      #   }
     end
 
     describe ".parse" do
@@ -57,8 +57,9 @@ module TrafficSpy
       end
 
       it "checks to see if the payload passed in is new" do
-        payload_instance.register(@delegate_return_value)
         parse_to_ruby = Payload.parse(@payload)
+        payload = Payload.new(parse_to_ruby, "jumpstartlab")
+        payload.register
         expect(Payload.new?(parse_to_ruby)).to be_false
       end
 
@@ -125,7 +126,7 @@ module TrafficSpy
       it "creates a payload object" do
         parse_to_ruby = Payload.parse(@payload)
         payload = Payload.new(parse_to_ruby, "jumpstartlab")
-        expect(payload.register(@delegate_return_value)).to be true
+        expect(payload.register).to be true
       end
     end
   end
