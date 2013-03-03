@@ -5,7 +5,7 @@ module TrafficSpy
 
     before(:each) do
       @ip_address = "1.2.3.4.5"
-      @ip_address_instance = Event.new(@ip_address)
+      @ip_address_instance = IpAddress.new(@ip_address)
       @ip_address_instance.register
     end
 
@@ -27,7 +27,7 @@ module TrafficSpy
       expect(instance.ip_address).to eq "socialLogin"
     end
 
-    it "registers a new ip_address in the ip_addresss table" do
+    it "registers a new ip_address in the ip_addresses table" do
       expect(@ip_address_instance.register).to eq true
     end
 

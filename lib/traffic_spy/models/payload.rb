@@ -73,17 +73,6 @@ module TrafficSpy
       requested_parts[1][0..1]
     end
 
-    # def make_new_objects
-    #   generate_account_id
-    #   generate_url_id
-    #   generate_event_id
-    #   generate_referring_url_id
-    #   generate_ip_address_id
-    #   generate_resolution_id
-    #   generate_browser_id
-    #   generate_operating_system_id
-    # end
-
     def generate_account_id
       Account.make_new_object(@identifier)
     end
@@ -117,7 +106,6 @@ module TrafficSpy
     end
 
     def register(hash_of_delegate)
-      # with the hash, put an entry in the payload db table
       DB[:payloads].insert(
       :account_id => hash_of_delegate["account_id"],
       :http_request => hash_of_delegate["http_request"],

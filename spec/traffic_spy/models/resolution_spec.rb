@@ -21,15 +21,23 @@ module TrafficSpy
       expect(Resolution.exists?(@resolution)).to be true
     end
 
+    it "combines resolution width and height" do
+      expect(Resolution.combine_resolutions("1440", "900")).to eq "1440 x 900"
+    end
+
+    it "registers a new resolution in the resolutions table" do
+      expect(@resolution_instance.register).to eq true
+    end
+
     it "returns the id of the row in the table" do
-      expect(Resolution.get_id(@resolution)).to eq 1
+      expect(Resolution.get_id(@resolution)).to be_kind_of(Integer)
     end
 
     it "makes a new object with a value that already exists" do
       expect(Resolution.make_new_object(@resolution)).to be_kind_of(Integer)
     end
 
-    it "makes a new object with a new event" do
+    it "makes a new object with a new resolution" do
       expect(Resolution.make_new_object("1280 x 800")).to be_kind_of(Integer)
     end
   end

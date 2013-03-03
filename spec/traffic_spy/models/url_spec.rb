@@ -33,7 +33,7 @@ module TrafficSpy
       expect(Url.make_new_object(@url)).to be_kind_of(Integer)
     end
 
-    it "makes a new object with a new event" do
+    it "makes a new object with a new url" do
       expect(Url.make_new_object("http://newurl.com")).to be_kind_of(Integer)
     end
   end

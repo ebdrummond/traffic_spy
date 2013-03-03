@@ -19,7 +19,7 @@ module TrafficSpy
       if exists?(referring_url)
         get_id(referring_url)
       else
-        referring_url_instance = ReferringUrl.new(url)
+        referring_url_instance = ReferringUrl.new(referring_url)
         referring_url_instance.register
         get_id(referring_url)
       end

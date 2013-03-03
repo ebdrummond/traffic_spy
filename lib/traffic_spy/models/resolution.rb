@@ -11,7 +11,7 @@ module TrafficSpy
     end
 
     def self.combine_resolutions(width, height)
-      "#{@resolution_width} x #{@resolution_height}"
+      "#{width} x #{height}"
     end
 
     def self.get_id(resolution)
