@@ -44,6 +44,8 @@ module TrafficSpy
     post '/sources/:identifier/data' do
       @identifier = params[:identifier]
       payload_ruby_hash = Payload.parse(params[:payload])
+      #do missing params come in as an empty string or nil?  nil breaking shit.
+      #check if payload.exists? okay to leave as checking identical time
       if Payload.params_missing?(payload_ruby_hash) == true
         status 400
         body "Sorry, but your request is missing required parameters.  Please try again."
@@ -59,7 +61,8 @@ module TrafficSpy
     end
 
     get '/sources/:identifier' do
-      erb :sources, :locals => {:identifier => params[:identifier]}
+      @identifier = params[:identifier]
+      erb :sources
     end
 
     get '/sources/:identifier/urls/:relative/:path' do

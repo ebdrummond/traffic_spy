@@ -15,12 +15,12 @@ require "traffic_spy/version"
 
 # DB = Sequel.postgres("traffic_spy")
 
-# curl -i -d 'payload={"url":"http://jumpstartlab.com","requestedAt":"2010-03-16 21:38:28 -0700","respondedIn":37,
-#   "referredBy":"http://jumpstartlab.com",
+# curl -i -d 'payload={"url":"http://erin.com","requestedAt":"2009-03-02 03:38:28 -0700","respondedIn":47,
+#   "referredBy":"http://kyle.com/blog",
 #   "requestType":"GET",
 #   "parameters":[],
-#   "eventName": "socialLogin",
-#   "userAgent":"Mozilla/5.0 (Macintosh: Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
-#   "resolutionWidth":"1920",
-#   "resolutionHeight":"1280",
-#   "ip":"63.29.38.211"}'  http://localhost:9393/sources/jumpstartlab/data
+#   "eventName": "antisocialLogin",
+#   "userAgent":"Mozilla/5.0 (Linux: Linux 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Opera/24.0.1309.0 Safari/537.17",
+#   "resolutionWidth":"1710",
+#   "resolutionHeight":"980",
+#   "ip":"12.11.38.211"}'  http://localhost:9393/sources/kyle/data

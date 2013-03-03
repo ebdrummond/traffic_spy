@@ -71,7 +71,7 @@ module TrafficSpy
     end
 
     def generate_referring_url_id
-      ReferringUrl.make_new_object(@referring_url)
+      ReferringUrl.make_new_object(@referred_by)
     end
 
     def generate_ip_address_id

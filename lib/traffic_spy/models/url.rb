@@ -29,5 +29,24 @@ module TrafficSpy
       DB[:urls].insert(:url => @url)
       return true
     end
+
+    def self.all_urls(identifier)
+      # DB[:urls].join(:url, )
+      # DB[:urls].select
+      # Get the account ID number for below
+
+      # Gives us an array of the payload mixed w/ url for a specific account
+      our_join = urls.join(:payloads, :url_id => :id)
+      our_join.to_a
+      our_join.where(:account_id => 1)
+      new_join = our_join.where(:account_id => 1)
+      new_join.to_a
+      # sort the current array or query by quantity of appearances of an url id
+      new_join.order(:)
+    end
+
+    def self.url_sort
+
+    end
   end
 end
