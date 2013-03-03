@@ -5,7 +5,7 @@ module TrafficSpy
     it "exists" do
       Payload.should be
     end
-    let (:payload_instance) { Payload.new (@payload) }
+    let (:payload_instance) { Payload.new(@payload, "jumpstartlab") }
     before(:each) do
       @payload = {
           "url" => "http://jumpstartlab.com",
@@ -44,14 +44,14 @@ module TrafficSpy
 
       it "parses JSON data to a readable Ruby hash" do
         parse_to_ruby = Payload.parse(@payload)
-        payload = Payload.new(parse_to_ruby)
+        payload = Payload.new(parse_to_ruby, "jumpstartlab")
         expect(payload).to be_a_kind_of(Payload)
       end
     end
 
     it "stores the parsed JSON into class instance variables" do
       parse_to_ruby = Payload.parse(@payload)
-      payload = Payload.new(parse_to_ruby)
+      payload = Payload.new(parse_to_ruby, "jumpstartlab")
       expect(payload.url).to eq "http://jumpstartlab.com"
     end
 
@@ -63,7 +63,7 @@ module TrafficSpy
 
     it "creates a new URL object" do
       parse_to_ruby = Payload.parse(@payload)
-      payload = Payload.new(parse_to_ruby)
+      payload = Payload.new(parse_to_ruby, "jumpstartlab")
       expect(payload.generate_url_id).to eq 1
     end
   end

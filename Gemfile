@@ -14,6 +14,7 @@ group :development do
   gem 'sequel'
   gem 'sinatra'
   gem 'simplecov'
+  gem 'agent_orange'
 end
 
 group :evaluations do

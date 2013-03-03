@@ -1,4 +1,5 @@
 require 'json'
+require 'agent_orange'
 
 module TrafficSpy
   class Payload
@@ -12,19 +13,24 @@ module TrafficSpy
                 :user_agent,
                 :resolution_width,
                 :resolution_height,
-                :ip_address
+                :resolution,
+                :ip_address,
+                :browser,
+                :operating_system
 
-    def initialize(input)
-      @url = input["url"]
-      @requested_at = input["requestedAt"]
-      @responded_in = input["respondedIn"]
-      @referred_by = input["referredBy"]
-      @parameters = input["parameters"]
-      @event_name = input["eventName"]
-      @user_agent = input["userAgent"]
-      @resolution_width = input["resolutionWidth"]
-      @resolution_height = input["resolutionHeight"]
-      @ip_address = input["ip"]
+    def initialize(payload, identifier)
+      @url = payload["url"]
+      @requested_at = payload["requestedAt"]
+      @responded_in = payload["respondedIn"]
+      @referred_by = payload["referredBy"]
+      @request_type = payload["requestType"]
+      @parameters = payload["parameters"]
+      @event_name = payload["eventName"]
+      @user_agent = payload["userAgent"]
+      @resolution_width = payload["resolutionWidth"]
+      @resolution_height = payload["resolutionHeight"]
+      @ip_address = payload["ip"]
+      @identifier = identifier
     end
 
     def self.parse(input)
@@ -35,33 +41,79 @@ module TrafficSpy
       DB[:payloads].where(:requested_at => payload["requestedAt"]).to_a.count < 1
     end
 
-    def combine_resolutions(width, height)
-      "#{@resolution_width} x #{@resolution_height}"
-    end
-
     def delegate
-      # make new instances of the classes
-      make_new_objects
-
-      # receive key values as return from certain classes
-        # account
-        # url
-        # referrer
-        # event
-        # resolution
-        # ip
-        # browser
-        # os
-
-      # return a hash of each table and corresponding value or row id
+      parse_payload_further
+      payload_db_row = {
+      "account_id" => generate_account_id,
+      "http_request" => @request_type,
+      "query_strings" => @parameters,
+      "url_id" => generate_url_id,
+      "referrer_id" => generate_referring_url_id,
+      "event_id" => generate_event_id,
+      "resolution_id" => generate_resolution_id,
+      "ip_address_id" => generate_ip_address_id,
+      "browser_id" => generate_browser_id,
+      "operating_system_id" => generate_operating_system_id,
+      "requested_at" => @requested_at,
+      "hour_of_day" => @hour_of_day,
+      "responded_in" => @responded_in
+      }
     end
 
-    def make_new_objects
-      generate_url_id
+    def parse_payload_further
+      @resolution = Resolution.combine_resolutions(@resolution_width, @resolution_height)
+      user_agent = AgentOrange::UserAgent.new(@user_agent)
+      @browser = user_agent.device.engine.browser
+      @operating_system = user_agent.device.operating_system.name
+      @hour_of_day = get_hour_of_day
+    end
+
+    def get_hour_of_day
+      requested_parts = @requested_at.split(" ")
+      requested_parts[1][0..1]
+    end
+
+    # def make_new_objects
+    #   generate_account_id
+    #   generate_url_id
+    #   generate_event_id
+    #   generate_referring_url_id
+    #   generate_ip_address_id
+    #   generate_resolution_id
+    #   generate_browser_id
+    #   generate_operating_system_id
+    # end
+
+    def generate_account_id
+      Account.make_new_object(@identifier)
     end
 
     def generate_url_id
       Url.make_new_object(@url)
+    end
+
+    def generate_event_id
+      Event.make_new_object(@event)
+    end
+
+    def generate_referring_url_id
+      ReferringUrl.make_new_object(@referring_url)
+    end
+
+    def generate_ip_address_id
+      IpAddress.make_new_object(@ip_address)
+    end
+
+    def generate_resolution_id
+      Resolution.make_new_object(@resolution)
+    end
+
+    def generate_browser_id
+      Browser.make_new_object(@browser)
+    end
+
+    def generate_operating_system_id
+      OperatingSystem.make_new_object(@operating_system)
     end
 
     def register(hash_of_delegate)
@@ -76,7 +128,7 @@ module TrafficSpy
       :resolution_id => hash_of_delegate["resolution_id"],
       :ip_address_id => hash_of_delegate["ip_address_id"],
       :browser_id => hash_of_delegate["browser_id"],
-      :operating_systems_id => hash_of_delegate["operating_systems_id"],
+      :operating_system_id => hash_of_delegate["operating_system_id"],
       :requested_at => hash_of_delegate["requested_at"],
       :hour_of_day => hash_of_delegate["hour_of_day"],
       :responded_in => hash_of_delegate["responded_in"])

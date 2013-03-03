@@ -10,6 +10,10 @@ module TrafficSpy
       DB[:resolutions].where(:resolution => resolution).to_a.count > 0
     end
 
+    def self.combine_resolutions(width, height)
+      "#{@resolution_width} x #{@resolution_height}"
+    end
+
     def self.get_id(resolution)
       resolution_row = DB[:resolutions].where(:resolution => resolution).to_a
       resolution_id = resolution_row[0][:id]

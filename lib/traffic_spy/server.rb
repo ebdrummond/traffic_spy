@@ -45,7 +45,7 @@ module TrafficSpy
       @identifier = params[:identifier]
       payload_ruby_hash = Payload.parse(params[:payload])
       if Account.exists?(@identifier) && Payload.new?(payload_ruby_hash)
-        payload = Payload.new(payload_ruby_hash)
+        payload = Payload.new(payload_ruby_hash, @identifier)
         delegated_hash = payload.delegate
         payload.register(delegated_hash)
         status 200

@@ -11,7 +11,7 @@ Sequel.migration do
       foreign_key :resolution_id
       foreign_key :ip_address_id
       foreign_key :browser_id
-      foreign_key :operating_systems_id
+      foreign_key :operating_system_id
       DateTime :requested_at
       Integer :hour_of_day
       Integer :responded_in
