@@ -43,22 +43,19 @@ module TrafficSpy
 
     post '/sources/:identifier/data' do
       @identifier = params[:identifier]
-      #come back to this outputting a string
-      #Payload.parse(params[:payload]).to_s
       payload_ruby_hash = Payload.parse(params[:payload])
-      payload_ruby_hash.to_s
-      # if Payload.params_missing?(payload_ruby_hash) == true
-      #   status 400
-      #   body "Sorry, but your request is missing required parameters.  Please try again."
-      # elsif Account.exists?(@identifier) && Payload.new?(payload_ruby_hash)
-      #   payload = Payload.new(payload_ruby_hash, @identifier)
-      #   payload.register
-      #   status 200
-      #   body "Thanks!  Information is available for review in your dashboard."
-      # elsif Account.exists?(@identifier) && Payload.new?(payload_ruby_hash) == false
-      #   status 403
-      #   body "Sorry, but this payload already exists in our database."
-      # end
+      if Payload.params_missing?(payload_ruby_hash) == true
+        status 400
+        body "Sorry, but your request is missing required parameters.  Please try again."
+      elsif Account.exists?(@identifier) && Payload.new?(payload_ruby_hash)
+        payload = Payload.new(payload_ruby_hash, @identifier)
+        payload.register
+        status 200
+        body "Thanks!  Information is available for review in your dashboard."
+      elsif Account.exists?(@identifier) && Payload.new?(payload_ruby_hash) == false
+        status 403
+        body "Sorry, but this payload already exists in our database."
+      end
     end
 
     get '/sources/:identifier' do
