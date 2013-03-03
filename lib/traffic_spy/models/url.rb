@@ -36,12 +36,13 @@ module TrafficSpy
       accounts = DB[:accounts]
 
       something = Hash.new{0}
-      url_ids_by_count = payloads.join(:urls, :id => :url_id).group_and_count(:url_id)
+      url_ids_by_count = payloads.join(:urls, :id => :url_id).group_and_count(:url_id).order(Sequel.desc(:count))
       url_ids_by_count.to_a.each do |url|
         url_id = url[:url_id]
-        actual_url_query = DB[:urls].where(:id => url_id).to_a
+        actual_url_query = db[:urls].where(:id => url_id).to_a
         actual_url = actual_url_query[0][:url]
         something[actual_url] += url[:count]
+        #something.inject(0){|sum, url_count| sum + url[:count]}
       end
     end
 
