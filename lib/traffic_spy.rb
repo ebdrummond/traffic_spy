@@ -19,8 +19,8 @@ require "traffic_spy/version"
 #   "referredBy":"http://jumpstartlab.com/checkout",
 #   "requestType":"GET",
 #   "parameters":[],
-#   "eventName": "antisocialLogin",
-#   "userAgent":"Mozilla/5.0 (Linux: Linux 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Opera/24.0.1309.0 Safari/537.17",
+#   "eventName": "",
+#   "userAgent":"Mozilla/5.0 (Macintosh: Linux 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Internet Explorer/24.0.1309.0 Safari/537.17",
 #   "resolutionWidth":"1710",
 #   "resolutionHeight":"980",
 #   "ip":"12.11.38.211"}'  http://localhost:9393/sources/kyle/data

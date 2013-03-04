@@ -62,8 +62,26 @@ module TrafficSpy
 
     get '/sources/:identifier' do
       @identifier = params[:identifier]
-      @sorted_urls = Url.sorted_urls(@identifier)
-      erb :sources
+      if Account.exists?(@identifier)
+        @sorted_urls = Url.sorted_urls(@identifier)
+        @browser_breakdown = Browser.breakdown(@identifier)
+        @os_breakdown = OperatingSystem.breakdown(@identifier)
+        erb :sources
+      else
+        erb :identifier_error
+      end
+    end
+
+    get '/sources/:identifier/events' do
+      @identifier = params[:identifier]
+      if Event.sorted_events(@identifier).all?{|event, count| event == ""}
+        erb :event_error
+      elsif Account.exists?(@identifier)
+        @sorted_events = Event.sorted_events(@identifier)
+        erb :event
+      else
+        erb :identifier_error
+      end
     end
 
     get '/sources/:identifier/urls/*' do
@@ -71,7 +89,7 @@ module TrafficSpy
       @path = "/" + params[:splat][0]
       @url_exists = Url.exists?(@path)
       if @url_exists
-        @response_times = Payload.response_times(@identifier, @path)
+        @response_times = Url.response_times(@identifier, @path)
       end
       erb :urls
     end    

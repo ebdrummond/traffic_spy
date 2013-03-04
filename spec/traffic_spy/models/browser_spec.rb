@@ -36,5 +36,9 @@ module TrafficSpy
     it "makes a new object with a new browser" do
       expect(Browser.make_new_object("Firefox")).to be_kind_of(Integer)
     end
+
+    it "returns browser breakdown across requests" do
+      expect(Browser.breakdown("jumpstartlab")).to be_kind_of(Hash)
+    end
   end
 end

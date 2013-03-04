@@ -55,5 +55,36 @@ module TrafficSpy
       end
       url_sorted_hash
     end
+
+    def self.response_times(identifier, url_path)
+      payloads = DB[:payloads]
+      urls = DB[:urls]
+      account_id = Account.get_id(identifier)
+
+      url_id_query = DB[:urls].where(:url => url_path).to_a
+      url_id = url_id_query[0][:id]
+
+      response_by_date = Hash.new{0}
+      payloads_for_url = payloads.where(:account_id => account_id).where(:url_id => url_id).order(Sequel.desc(:responded_in))
+      payloads_for_url.to_a.each do |payload_row|
+        date = 
+        response_by_date[payload_row[:requested_at]] = payload_row[:responded_in]
+      end
+      response_by_date
+    end
+
+    def self.average_response_times(identifier)
+      payloads = DB[:payloads]
+      urls = DB[:urls]
+      account_id = Account.get_id(identifier)
+
+      times_sorted_hash = Hash.new{0}
+      payloads_for_url = payloads.where(:account_id => account_id).order(Sequel.desc(:responded_in))
+      payloads_for_url.to_a.each do |payload_row|
+        date = 
+        times_sorted_hash[payload_row[:requested_at]] = payload_row[:responded_in]
+      end
+      times_sorted_hash
+    end
   end
 end

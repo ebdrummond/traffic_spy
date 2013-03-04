@@ -55,38 +55,12 @@
     <div id="content" class="large-10 columns">
       <div id="content-inner">
         <div class="widget">
-          <h3>Pages</h3>
+          <h3>Events</h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
             <thead>
               <tr>
-                <th>URL</th>
-                <th>Requests</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-            <tbody>
-              <% @sorted_urls.each_with_index do |(url, count), index| %>
-              <tr <%= "class='even'" unless index %2 == 0 %>>
-                <td><a href="/sources/<%= @identifier %>/urls<%= url %>"><%= url %></a></td>
-                <td><%= count %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
-        </div>
-
-        <div class="widget">
-          <h3>Browsers</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>Browser</th>
+                <th>Events</th>
                 <th>Count</th>
               </tr>
             </thead>
@@ -94,37 +68,9 @@
 
             <!-- Table Body -->
             <tbody>
-              <% @browser_breakdown.each do |browser, count| %>
+              <% @sorted_events.each do |event, count| %>
               <tr>
-               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= browser %></td>
-                <td><%= count %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
-        </div>
-
-          <div class="widget">
-          <h3>Operating Systems</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>OS</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-            <tbody>
-              <% @os_breakdown.each do |os, count| %>
-              <tr>
-               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= os %></td>
+                <td><a href="/sources/<%= @identifier %>/events/<%= @event_name%>"><%= event %></a></td>
                 <td><%= count %></td>
               </tr><!-- Table Row -->
               <% end %>

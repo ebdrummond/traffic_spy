@@ -43,24 +43,7 @@ module TrafficSpy
     end
 
     def self.params_missing?(payload)
-      payload.any?{|payload_param| payload_param[1] == "" || nil}
-    end
-
-    def self.response_times(identifier, url_path)
-      payloads = DB[:payloads]
-      urls = DB[:urls]
-      account_id = Account.get_id(identifier)
-
-      url_id_query = DB[:urls].where(:url => url_path).to_a
-      url_id = url_id_query[0][:id]
-
-      times_sorted_hash = Hash.new{0}
-      payloads_for_url = payloads.where(:account_id => account_id).where(:url_id => url_id).order(Sequel.desc(:responded_in))
-      payloads_for_url.to_a.each do |payload_row|
-        date = 
-        times_sorted_hash[payload_row[:requested_at]] = payload_row[:responded_in]
-      end
-      times_sorted_hash
+      payload.any?{|payload_param| if payload_param[0] != "eventName" then (payload_param[1] == "" || payload_param[1] == nil) end}
     end
 
     def parse_payload_further
@@ -85,7 +68,7 @@ module TrafficSpy
     end
 
     def generate_event_id
-      Event.make_new_object(@event)
+      Event.make_new_object(@event_name)
     end
 
     def generate_referring_url_id
