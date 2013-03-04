@@ -38,7 +38,7 @@ module TrafficSpy
     end
 
     it "returns operating systems breakdown" do
-      expect(OperatingSystem.breakdown("erin")).to be_kind_of(Hash)
+      expect(OperatingSystem.breakdown("jumpstartlab")).to be_kind_of(Hash)
     end
   end
 end

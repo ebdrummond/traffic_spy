@@ -107,7 +107,7 @@
           </table>
         </div>
 
-        <div class="widget">
+          <div class="widget">
           <h3>Operating Systems</h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
@@ -134,6 +134,32 @@
           </table>
         </div>
         <div class="widget">
+          <h3>Screen Resolutions</h3>
+          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+            <!-- Table Header -->
+            <thead>
+              <tr>
+                <th>Screen Resolution</th>
+                <th>Count</th>
+              </tr>
+            </thead>
+            <!-- Table Header -->
+
+            <!-- Table Body -->
+            <tbody>
+              <% @resolution_breakdown.each do |resolution, count| %>
+              <tr>
+               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
+                <td><%= resolution %></td>
+                <td><%= count %></td>
+              </tr><!-- Table Row -->
+              <% end %>
+            </tbody>
+            <!-- Table Body -->
+
+          </table>
+        </div>
+        <div class="widget">
           <h3>Response Times</h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
@@ -147,11 +173,11 @@
 
             <!-- Table Body -->
             <tbody>
-              <% @avg_response_times.each do |path, response| %>
+              <% @avg_response_times.each do |page, response| %>
               <tr>
                <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= path %></td>
-                <td><%= response %>ms</td>
+                <td><%= page %></td>
+                <td><%= response %></td>
               </tr><!-- Table Row -->
               <% end %>
             </tbody>

@@ -66,6 +66,7 @@ module TrafficSpy
         @sorted_urls = Url.sorted_urls(@identifier)
         @browser_breakdown = Browser.breakdown(@identifier)
         @os_breakdown = OperatingSystem.breakdown(@identifier)
+        @resolution_breakdown = Resolution.breakdown(@identifier)
         @avg_response_times = Url.average_response_times(@identifier)
         erb :sources
       else

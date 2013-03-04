@@ -44,7 +44,7 @@ module TrafficSpy
     end
 
     it "returns a list of sorted events" do
-      expect(Event.sorted_events("erin")).to be_kind_of(Hash)
+      expect(Event.sorted_events("jumpstartlab")).to be_kind_of(Hash)
     end
   end
 end
