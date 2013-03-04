@@ -107,7 +107,7 @@
           </table>
         </div>
 
-          <div class="widget">
+        <div class="widget">
           <h3>Operating Systems</h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
@@ -126,6 +126,32 @@
                <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
                 <td><%= os %></td>
                 <td><%= count %></td>
+              </tr><!-- Table Row -->
+              <% end %>
+            </tbody>
+            <!-- Table Body -->
+
+          </table>
+        </div>
+        <div class="widget">
+          <h3>Response Times</h3>
+          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+            <!-- Table Header -->
+            <thead>
+              <tr>
+                <th>Page</th>
+                <th>Avg. Response</th>
+              </tr>
+            </thead>
+            <!-- Table Header -->
+
+            <!-- Table Body -->
+            <tbody>
+              <% @avg_response_times.each do |path, response| %>
+              <tr>
+               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
+                <td><%= path %></td>
+                <td><%= response %>ms</td>
               </tr><!-- Table Row -->
               <% end %>
             </tbody>
