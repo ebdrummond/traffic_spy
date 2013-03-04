@@ -26,7 +26,6 @@ module TrafficSpy
 
     def self.get_id(identifier)
       account_row = DB[:accounts].where(:identifier => identifier).to_a
-      puts account_row
       account_id = account_row[0][:id]
     end
   end
