@@ -42,7 +42,6 @@ module TrafficSpy
         actual_browser_query = DB[:browsers].where(:id => browser_id).to_a
         actual_browser = actual_browser_query[0][:browser]
         browsers_hash[actual_browser] += browser_row[:count]
-        puts browsers_hash
       end
       browsers_hash
     end

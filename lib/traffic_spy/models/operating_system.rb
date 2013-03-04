@@ -42,7 +42,6 @@ module TrafficSpy
         actual_os_query = DB[:operating_systems].where(:id => os_id).to_a
         actual_os = actual_os_query[0][:operating_system]
         os_hash[actual_os] += os_row[:count]
-        puts os_hash
       end
       os_hash
     end

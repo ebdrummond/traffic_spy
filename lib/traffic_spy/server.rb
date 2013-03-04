@@ -68,7 +68,7 @@ module TrafficSpy
         @os_breakdown = OperatingSystem.breakdown(@identifier)
         erb :sources
       else
-        erb :error
+        erb :identifier_error
       end
     end
 
@@ -76,7 +76,19 @@ module TrafficSpy
       erb :urls, :locals => { :identifier => params[:identifier],
                               :relative   => params[:relative],
                               :path       => params[:path]  }
-    end    
+    end 
+
+    get '/sources/:identifier/events' do
+      @identifier = params[:identifier]
+      if Event.sorted_events(@identifier).any?{|event, count| event == ""}
+        erb :event_error
+      elsif Account.exists?(@identifier)
+        @sorted_events = Event.sorted_events(@identifier)
+        erb :event
+      else
+        erb :identifier_error
+      end
+    end
 
     not_found do
       erb :error

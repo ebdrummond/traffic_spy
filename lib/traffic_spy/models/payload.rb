@@ -42,7 +42,7 @@ module TrafficSpy
     end
 
     def self.params_missing?(payload)
-      payload.any?{|payload_param| payload_param[1] == "" || nil}
+      payload.any?{|payload_param| if payload_param[0] != "eventName" then (payload_param[1] == "" || payload_param[1] == nil) end}
     end
 
     def parse_payload_further
@@ -67,7 +67,7 @@ module TrafficSpy
     end
 
     def generate_event_id
-      Event.make_new_object(@event)
+      Event.make_new_object(@event_name)
     end
 
     def generate_referring_url_id

@@ -42,5 +42,9 @@ module TrafficSpy
     it "makes a new object with a new event" do
       expect(Event.make_new_object("newEvent")).to be_kind_of(Integer)
     end
+
+    it "returns a list of sorted events" do
+      expect(Event.sorted_events("erin")).to be_kind_of(Hash)
+    end
   end
 end
