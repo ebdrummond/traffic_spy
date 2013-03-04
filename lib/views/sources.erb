@@ -54,136 +54,143 @@
 
     <div id="content" class="large-10 columns">
       <div id="content-inner">
-        <div class="widget">
-          <h3>Pages</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>URL</th>
-                <th>Requests</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
+        <div class="row">
+          <div class="widget">
+            <h3>Pages</h3>
+            <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+              <!-- Table Header -->
+              <thead>
+                <tr>
+                  <th>URL</th>
+                  <th>Requests</th>
+                </tr>
+              </thead>
+              <!-- Table Header -->
 
-            <!-- Table Body -->
-            <tbody>
-              <% @sorted_urls.each_with_index do |(url, count), index| %>
-              <tr <%= "class='even'" unless index %2 == 0 %>>
-                <td><a href="/sources/<%= @identifier %>/urls<%= url %>"><%= url %></a></td>
-                <td><%= count %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
+              <!-- Table Body -->
+              <tbody>
+                <% @sorted_urls.each_with_index do |(url, count), index| %>
+                <tr <%= "class='even'" unless index %2 == 0 %>>
+                  <td><a href="/sources/<%= @identifier %>/urls<%= url %>"><%= url %></a></td>
+                  <td><%= count %></td>
+                </tr><!-- Table Row -->
+                <% end %>
+              </tbody>
+              <!-- Table Body -->
 
-          </table>
-        </div>
-
-        <div class="widget">
-          <h3>Browsers</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>Browser</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-            <tbody>
-              <% @browser_breakdown.each do |browser, count| %>
-              <tr>
-               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= browser %></td>
-                <td><%= count %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
-        </div>
+            </table>
+          </div>
 
           <div class="widget">
-          <h3>Operating Systems</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>OS</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
+            <h3>Browsers</h3>
+            <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+              <!-- Table Header -->
+              <thead>
+                <tr>
+                  <th>Browser</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <!-- Table Header -->
 
-            <!-- Table Body -->
-            <tbody>
-              <% @os_breakdown.each do |os, count| %>
-              <tr>
-               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= os %></td>
-                <td><%= count %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
+              <!-- Table Body -->
+              <tbody>
+                <% @browser_breakdown.each do |browser, count| %>
+                <tr>
+                 <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
+                  <td><%= browser %></td>
+                  <td><%= count %></td>
+                </tr><!-- Table Row -->
+                <% end %>
+              </tbody>
+              <!-- Table Body -->
 
-          </table>
+            </table>
+          </div>
         </div>
-        <div class="widget">
-          <h3>Screen Resolutions</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>Screen Resolution</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
 
-            <!-- Table Body -->
-            <tbody>
-              <% @resolution_breakdown.each do |resolution, count| %>
-              <tr>
-               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= resolution %></td>
-                <td><%= count %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
+        <div class="row">
+          <div class="widget">
+            <h3>Operating Systems</h3>
+            <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+              <!-- Table Header -->
+              <thead>
+                <tr>
+                  <th>OS</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <!-- Table Header -->
 
-          </table>
+              <!-- Table Body -->
+              <tbody>
+                <% @os_breakdown.each do |os, count| %>
+                <tr>
+                 <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
+                  <td><%= os %></td>
+                  <td><%= count %></td>
+                </tr><!-- Table Row -->
+                <% end %>
+              </tbody>
+              <!-- Table Body -->
+
+            </table>
+          </div>
+          <div class="widget">
+            <h3>Screen Resolutions</h3>
+            <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+              <!-- Table Header -->
+              <thead>
+                <tr>
+                  <th>Screen Resolution</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <!-- Table Header -->
+
+              <!-- Table Body -->
+              <tbody>
+                <% @resolution_breakdown.each do |resolution, count| %>
+                <tr>
+                 <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
+                  <td><%= resolution %></td>
+                  <td><%= count %></td>
+                </tr><!-- Table Row -->
+                <% end %>
+              </tbody>
+              <!-- Table Body -->
+
+            </table>
+          </div>
         </div>
-        <div class="widget">
-          <h3>Response Times</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>Page</th>
-                <th>Avg. Response</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
+        <div class="row">
+          <div class="widget">
+            <h3>Response Times</h3>
+            <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+              <!-- Table Header -->
+              <thead>
+                <tr>
+                  <th>Page</th>
+                  <th>Avg. Response</th>
+                </tr>
+              </thead>
+              <!-- Table Header -->
 
-            <!-- Table Body -->
-            <tbody>
-              <% @avg_response_times.each do |page, response| %>
-              <tr>
-               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= page %></td>
-                <td><%= response %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
+              <!-- Table Body -->
+              <tbody>
+                <% @avg_response_times.each do |page, response| %>
+                <tr>
+                 <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
+                  <td><%= page %></td>
+                  <td><%= response %></td>
+                </tr><!-- Table Row -->
+                <% end %>
+              </tbody>
+              <!-- Table Body -->
 
-          </table>
+            </table>
+          </div>
+          
         </div>
       </div>
     </div>
