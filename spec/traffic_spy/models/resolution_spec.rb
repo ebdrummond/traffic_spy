@@ -40,5 +40,9 @@ module TrafficSpy
     it "makes a new object with a new resolution" do
       expect(Resolution.make_new_object("1280 x 800")).to be_kind_of(Integer)
     end
+
+    it "returns a breakdown of screen resolutions across all requests" do
+      expect(Resolution.breakdown("jumpstartlab")).to be_kind_of(Hash)
+    end
   end
 end

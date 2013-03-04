@@ -18,3 +18,4 @@ tmp
 .sqlite3
 .gitignore
 coverage/
+traffic_spy-test.sqlite3
