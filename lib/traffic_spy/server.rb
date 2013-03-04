@@ -70,7 +70,9 @@ module TrafficSpy
       @identifier = params[:identifier]
       @path = "/" + params[:splat][0]
       @url_exists = Url.exists?(@path)
-      @response_times = Payload.response_times(@identifier, @path)
+      if @url_exists
+        @response_times = Payload.response_times(@identifier, @path)
+      end
       erb :urls
     end    
 
