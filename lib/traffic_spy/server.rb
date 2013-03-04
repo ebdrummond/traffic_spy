@@ -86,6 +86,17 @@ module TrafficSpy
       end
     end
 
+    get '/sources/:identifier/events/:event_name' do
+      @identifier = params[:identifier]
+      @event_name = params[:event_name]
+      if Event.sorted_events(@identifier).any?{|event, count| event == @event_name}
+        @reg_times = Event.registration_times(@identifier, @event_name)
+        erb :event_details
+      else
+        erb :event_name_error
+      end
+    end
+
     get '/sources/:identifier/urls/*' do
       @identifier = params[:identifier]
       @path = "/" + params[:splat][0]
