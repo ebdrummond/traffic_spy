@@ -42,7 +42,6 @@ module TrafficSpy
         actual_event_query = DB[:events].where(:id => event_id).to_a
         actual_event = actual_event_query[0][:event]
         event_sorted_hash[actual_event] += event_row[:count]
-        puts event_sorted_hash
       end
       event_sorted_hash
     end
