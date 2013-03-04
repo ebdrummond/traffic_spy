@@ -46,7 +46,6 @@
         <li><a href="#"><i class="icon-time"></i>Response Times</a></li>
         <li><a href="#"><i class="icon-money"></i>Campaigns</a></li>
         <li><a href="#"><i class="icon-group"></i>Events</a></li>
-        <li><a href="#"><i class="icon-cogs"></i>Browsers</a></li>
         <li><a href="#"><i class="icon-cogs"></i>Operating Systems</a></li>
         <li><a href="#"><i class="icon-laptop"></i>Screen Resolutions</a></li>
       </ul>
@@ -54,24 +53,26 @@
 
     <div id="content" class="large-10 columns">
       <div id="content-inner">
-        <div class="widget">
-          <h3>Pages</h3>
+        <% if @url_exists == true %>
+        <div class="full-table">
+          <h3>Response Times For <em>"<%= @path %>"</em></h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
             <thead>
               <tr>
-                <th>URL</th>
-                <th>Requests</th>
+                <th>Date</th>
+                <th>Response</th>
               </tr>
             </thead>
             <!-- Table Header -->
 
             <!-- Table Body -->
+
             <tbody>
-              <% @sorted_urls.each_with_index do |(url, count), index| %>
+              <% @response_times.each_with_index do |(date, response_time), index| %>
               <tr <%= "class='even'" unless index %2 == 0 %>>
-                <td><a href="/sources/<%= @identifier %>/urls<%= url %>"><%= url %></a></td>
-                <td><%= count %></td>
+                <td><%= date.strftime('%e %b %Y %H:%m:%S%p') %></td>
+                <td><%= response_time %>ms</td>
               </tr><!-- Table Row -->
               <% end %>
             </tbody>
@@ -79,59 +80,9 @@
 
           </table>
         </div>
-
-        <div class="widget">
-          <h3>Browsers</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>Browser</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-            <tbody>
-              <% @browser_breakdown.each do |browser, count| %>
-              <tr>
-               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= browser %></td>
-                <td><%= count %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
-
-          <div class="widget">
-          <h3>Operating Systems</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>OS</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-            <tbody>
-              <% @os_breakdown.each do |os, count| %>
-              <tr>
-               <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
-                <td><%= os %></td>
-                <td><%= count %></td>
-              </tr><!-- Table Row -->
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
-        </div>
+        <% else %>
+        <p>That URL doesn't exists.</p>
+        <% end %>
       </div>
     </div>
   </div>

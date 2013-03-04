@@ -30,6 +30,16 @@ module TrafficSpy
       return true
     end
 
+    def self.get_path(full_url)
+      parts = full_url.split("/")
+      if parts[3]
+        path = "/" + parts[3..-1].join("/")
+      else
+        path = "/"
+      end
+      path
+    end
+
     def self.sorted_urls(identifier)
       urls = DB[:urls]
       payloads = DB[:payloads]

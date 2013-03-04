@@ -3311,7 +3311,7 @@ table td {
   border-top: 1px solid #ffffff;
   border-bottom:1px solid #e0e0e0;
   border-left: 1px solid #e0e0e0;
-
+  font-weight: bold;
   background: #fafafa;
   background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
   background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
@@ -3534,6 +3534,11 @@ table tr:hover td {
 }
 .widget {
   width: 45.5%;
+  float: left;
+  margin-left: 2em;
+}
+.full-table {
+  width: 94%;
   float: left;
   margin-left: 2em;
 }
