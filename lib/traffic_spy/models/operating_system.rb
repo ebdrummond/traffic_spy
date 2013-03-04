@@ -29,5 +29,22 @@ module TrafficSpy
       DB[:operating_systems].insert(:operating_system => @operating_system)
       return true
     end
+
+    def self.breakdown(identifier)
+      operating_systems = DB[:operating_systems]
+      payloads = DB[:payloads]
+      account_id = Account.get_id(identifier)
+
+      os_hash = Hash.new(0)
+      os_by_account_id = payloads.where(:account_id => account_id).join(:operating_systems, :id => :operating_system_id).group_and_count(:operating_system_id).order(Sequel.desc(:count))
+      os_by_account_id.to_a.each do |os_row|
+        os_id = os_row[:operating_system_id]
+        actual_os_query = DB[:operating_systems].where(:id => os_id).to_a
+        actual_os = actual_os_query[0][:operating_system]
+        os_hash[actual_os] += os_row[:count]
+        puts os_hash
+      end
+      os_hash
+    end
   end
 end

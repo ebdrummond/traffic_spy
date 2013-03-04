@@ -38,7 +38,7 @@ module TrafficSpy
     end
 
     it "returns browser breakdown across requests" do
-      expect(Browser.browser_breakdown("jumpstartlab")).to be_kind_of(Hash)
+      expect(Browser.breakdown("jumpstartlab")).to be_kind_of(Hash)
     end
   end
 end

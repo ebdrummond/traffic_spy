@@ -36,5 +36,9 @@ module TrafficSpy
     it "makes a new object with a new operating_system" do
       expect(OperatingSystem.make_new_object("Linux")).to be_kind_of(Integer)
     end
+
+    it "returns operating systems breakdown" do
+      expect(OperatingSystem.breakdown("erin")).to be_kind_of(Hash)
+    end
   end
 end

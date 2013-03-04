@@ -30,7 +30,7 @@ module TrafficSpy
       return true
     end
 
-    def self.browser_breakdown(identifier)
+    def self.breakdown(identifier)
       browsers = DB[:browsers]
       payloads = DB[:payloads]
       account_id = Account.get_id(identifier)

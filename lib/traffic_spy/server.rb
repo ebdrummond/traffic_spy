@@ -62,8 +62,14 @@ module TrafficSpy
 
     get '/sources/:identifier' do
       @identifier = params[:identifier]
-      @sorted_urls = Url.sorted_urls(@identifier)
-      erb :sources
+      if Account.exists?(@identifier)
+        @sorted_urls = Url.sorted_urls(@identifier)
+        @browser_breakdown = Browser.breakdown(@identifier)
+        @os_breakdown = OperatingSystem.breakdown(@identifier)
+        erb :sources
+      else
+        erb :error
+      end
     end
 
     get '/sources/:identifier/urls/:relative/:path' do
