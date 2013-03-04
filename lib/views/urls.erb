@@ -71,8 +71,8 @@
             <tbody>
               <% @response_times.each_with_index do |(date, response_time), index| %>
               <tr <%= "class='even'" unless index %2 == 0 %>>
-                <td><a href="/sources/<%= @identifier %>/urls<%= url %>"><%= date %></a></td>
-                <td><%= response_time %></td>
+                <td><%= date.strftime('%e %b %Y %H:%m:%S%p') %></td>
+                <td><%= response_time %>ms</td>
               </tr><!-- Table Row -->
               <% end %>
             </tbody>
