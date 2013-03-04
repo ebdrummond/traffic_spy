@@ -80,7 +80,7 @@ module TrafficSpy
 
     get '/sources/:identifier/events' do
       @identifier = params[:identifier]
-      if Event.sorted_events(@identifier).any?{|event, count| event == ""}
+      if Event.sorted_events(@identifier).all?{|event, count| event == ""}
         erb :event_error
       elsif Account.exists?(@identifier)
         @sorted_events = Event.sorted_events(@identifier)
