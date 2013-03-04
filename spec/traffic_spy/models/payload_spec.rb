@@ -53,7 +53,7 @@ module TrafficSpy
       it "stores the parsed JSON into class instance variables" do
         parse_to_ruby = Payload.parse(@payload)
         payload = Payload.new(parse_to_ruby, "jumpstartlab")
-        expect(payload.url).to eq "http://jumpstartlab.com"
+        expect(payload.url).to eq "/"
       end
 
       it "checks to see if the payload passed in is new" do

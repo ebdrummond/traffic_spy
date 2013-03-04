@@ -15,7 +15,7 @@ require "traffic_spy/version"
 
 # DB = Sequel.postgres("traffic_spy")
 
-# curl -i -d 'payload={"url":"http://jumpstartlab.com/about","requestedAt":"1998-07-02 03:17:28 -0700","respondedIn":47,
+# curl -i -d 'payload={"url":"http://kyle.com/thisone/thatone","requestedAt":"1915-01-02 03:17:28 -0900","respondedIn":27,
 #   "referredBy":"http://jumpstartlab.com/checkout",
 #   "requestType":"GET",
 #   "parameters":[],
@@ -23,4 +23,4 @@ require "traffic_spy/version"
 #   "userAgent":"Mozilla/5.0 (Linux: Linux 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Opera/24.0.1309.0 Safari/537.17",
 #   "resolutionWidth":"1710",
 #   "resolutionHeight":"980",
-#   "ip":"12.11.38.211"}'  http://localhost:9393/sources/jumpstartlab/data
+#   "ip":"12.11.38.211"}'  http://localhost:9393/sources/kyle/data

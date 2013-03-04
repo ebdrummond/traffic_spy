@@ -3537,6 +3537,11 @@ table tr:hover td {
   float: left;
   margin-left: 2em;
 }
+.full-table {
+  width: 94%;
+  float: left;
+  margin-left: 2em;
+}
 li [class^="icon-"], .nav li [class^="icon-"], li [class*=" icon-"], .nav li [class*=" icon-"] {
   margin-right: .5em;
 }

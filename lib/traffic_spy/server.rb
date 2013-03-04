@@ -66,10 +66,12 @@ module TrafficSpy
       erb :sources
     end
 
-    get '/sources/:identifier/urls/:relative/:path' do
-      erb :urls, :locals => { :identifier => params[:identifier],
-                              :relative   => params[:relative],
-                              :path       => params[:path]  }
+    get '/sources/:identifier/urls/*' do
+      @identifier = params[:identifier]
+      @path = "/" + params[:splat][0]
+      @url_exists = Url.exists?(@path)
+      @response_times = Payload.response_times(@identifier, @path)
+      erb :urls
     end    
 
     not_found do

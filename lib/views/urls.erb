@@ -53,24 +53,26 @@
 
     <div id="content" class="large-10 columns">
       <div id="content-inner">
-        <div class="widget">
-          <h3>Pages</h3>
+        <% if @url_exists == true %>
+        <div class="full-table">
+          <h3>Response Times For <em>"<%= @path %>"</em></h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
             <thead>
               <tr>
-                <th>URL</th>
-                <th>Requests</th>
+                <th>Date</th>
+                <th>Response</th>
               </tr>
             </thead>
             <!-- Table Header -->
 
             <!-- Table Body -->
+
             <tbody>
-              <% @sorted_urls.each_with_index do |(url, count), index| %>
+              <% @response_times.each_with_index do |(date, response_time), index| %>
               <tr <%= "class='even'" unless index %2 == 0 %>>
-                <td><a href="/sources/<%= @identifier %>/urls<%= url %>"><%= url %></a></td>
-                <td><%= count %></td>
+                <td><a href="/sources/<%= @identifier %>/urls<%= url %>"><%= date %></a></td>
+                <td><%= response_time %></td>
               </tr><!-- Table Row -->
               <% end %>
             </tbody>
@@ -78,66 +80,9 @@
 
           </table>
         </div>
-        <div class="widget">
-          <h3>Response Times</h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>URL</th>
-                <th>Average</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-            <tbody>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/ohyeah</a></td>
-                <td>500ms</td>
-              </tr><!-- Table Row -->
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>450ms</td>
-              </tr><!-- Darker Table Row -->
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>300ms</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>200ms</td>
-              </tr>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>200ms</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>100ms</td>
-              </tr>
-
-              <tr>
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>75ms</td>
-              </tr>
-
-              <tr class="even">
-                <td><a href="#">http://jumpstartlab.com/whoa</a></td>
-                <td>70ms</td>
-              </tr>
-
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
-        </div>
+        <% else %>
+        <p>That URL doesn't exists.</p>
+        <% end %>
       </div>
     </div>
   </div>
