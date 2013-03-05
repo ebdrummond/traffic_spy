@@ -70,7 +70,7 @@
             <tbody>
               <% @sorted_events.each do |event, count| %>
               <tr>
-                <td><a href="/sources/<%= @identifier %>/events/<%= @event_name%>"><%= event %></a></td>
+                <td><a href="/sources/<%= @identifier %>/events/<%= event %>"><%= event %></a></td>
                 <td><%= count %></td>
               </tr><!-- Table Row -->
               <% end %>
