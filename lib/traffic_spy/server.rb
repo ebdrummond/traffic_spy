@@ -136,11 +136,19 @@ module TrafficSpy
     end
 
     get '/sources/:identifier/campaigns' do
-      # @identifier = params[:identifier]
-      # if Campaign.exists?
-      #   @campaigns_and_events = CampaignEvent.campaign_event_count(@identifier)
-      # end
+      @identifier = params[:identifier]
+      if CampaignEvent.any?(@identifier)
+        @exists = true
+        @campaigns_and_events = CampaignEvent.campaign_event_count(@identifier)
+      end
       erb :campaigns
+    end
+
+    get '/sources/:identifier/campaigns/:campaign' do
+      @identifier = params[:identifier]
+      @campaign = params[:campaign]
+      @campaign_events = CampaignEvent.campaign_events(@identifier, @campaign)
+      erb :campaign_events
     end
 
     not_found do

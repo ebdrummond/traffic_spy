@@ -58,13 +58,12 @@
     <div id="content" class="large-10 columns">
       <div id="content-inner">
         <div class="full-table">
-          <h3>Campaigns</h3>
+          <h3>Events For <em><%= @campaign %></em></h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
             <thead>
               <tr>
-                <th>Campaign</th>
-                <th>Events</th>
+                <th>Event</th>
               </tr>
             </thead>
             <!-- Table Header -->
@@ -72,14 +71,13 @@
             <!-- Table Body -->
 
             <tbody>
-              <% @campaigns_and_events.each_with_index do |(campaign, event_count), index| %>
+              <% @campaign_events.each_with_index do |event, index| %>
               <tr <%= "class='even'" unless index %2 == 0 %>>
                 <td>
-                  <a href="/sources/<%= @identifier %>/campaigns/<%= campaign %>">
-                    <%= campaign %>
+                  <a href="/sources/<%= @identifier %>/events/<%= event %>">
+                    <%= event %>
                   </a>
                 </td>
-                <td><%= event_count %></td>
               </tr><!-- Table Row -->
               <% end %>
             </tbody>
