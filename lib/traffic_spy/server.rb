@@ -1,6 +1,7 @@
-require 'sinatra'
+require 'sinatra/base'
 
 module TrafficSpy
+
 
   # Sinatra::Base - Middleware, Libraries, and Modular Apps
   #
@@ -23,13 +24,13 @@ module TrafficSpy
     post '/sources' do
       @identifier = params[:identifier]
       @rootUrl = params[:rootUrl]
-      if Account.exists?(@identifier)
+      if !@identifier || !@rootUrl
+        status 400
+        body "Sorry, but your request is missing required parameters.  Please try again."
+      elsif Account.exists?(@identifier)
         @exists = true
         status 403
         body "Sorry, but #{@identifier} already exists in our database."
-      elsif (@identifier || @rootUrl).nil?
-        status 400
-        body "Sorry, but your request is missing required parameters.  Please try again."
       else
         @exists = false
         account = Account.new(@identifier, @rootUrl)

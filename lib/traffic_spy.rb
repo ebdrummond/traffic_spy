@@ -1,6 +1,5 @@
 ENV["TRAFFIC_SPY_ENV"] ||= "test"
 
-require 'sinatra/base'
 require 'sequel'
 require 'traffic_spy/models/base'
 require 'traffic_spy/server'
@@ -26,3 +25,9 @@ require "traffic_spy/version"
 #   "resolutionHeight":"980",
 #   "ip":"12.11.38.211"}'  http://localhost:9393/sources/elaine/data
 
+#Figure out PG
+#Push to Heroku
+#Run spec harness
+#hour by hour breakdown correct?
+#/ at end of page??
+#events from campaign events? not showing up on events page (sourced from payloads)

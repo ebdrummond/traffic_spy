@@ -14,8 +14,8 @@ module TrafficSpy
     end
 
     it "should take in Event string" do
-      instance = Event.new("Zombie Run")
-      expect(instance.event).to eq "Zombie Run"
+      instance = Event.new("socialLogin")
+      expect(instance.event).to eq "socialLogin"
     end
 
     it "tests whether a event already exists" do
