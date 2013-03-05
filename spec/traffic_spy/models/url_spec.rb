@@ -40,5 +40,13 @@ module TrafficSpy
     it "returns urls sorted by top visited urls" do
       expect(Url.sorted_urls("jumpstartlab")).to be_kind_of(Hash)
     end
+
+    it "returns a list of response times by URL" do
+      expect(Url.response_times("jumpstartlab", "/")).to be_kind_of(Hash)
+    end
+
+    it "returns a list of average response times by identifier" do
+      expect(Url.average_response_times("jumpstartlab")).to be_kind_of(Hash)
+    end
   end
 end
