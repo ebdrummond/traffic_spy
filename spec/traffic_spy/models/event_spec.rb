@@ -46,5 +46,9 @@ module TrafficSpy
     it "returns a list of sorted events" do
       expect(Event.sorted_events("jumpstartlab")).to be_kind_of(Hash)
     end
+
+    it "returns a list of event registration times by hour" do
+      expect(Event.registration_times("jumpstartlab", "socialLogin")).to be_kind_of(Hash)
+    end
   end
 end

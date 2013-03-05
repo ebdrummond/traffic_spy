@@ -46,11 +46,6 @@ module TrafficSpy
       event_sorted_hash
     end
 
-    def self.get_id(event)
-      event_row = DB[:events].where(:event => event).to_a
-      event_id = event_row[0][:id]
-    end
-
     def self.registration_times(identifier, event_name)
       events = DB[:events]
       payloads = DB[:payloads]

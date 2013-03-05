@@ -4,10 +4,6 @@ require 'rack/test'
 module TrafficSpy
   include Rack::Test::Methods
 
-  def app
-    Server
-  end
-
   describe Server do
     it "exists" do
       Server.should be
