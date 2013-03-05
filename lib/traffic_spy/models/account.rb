@@ -8,8 +8,12 @@ module TrafficSpy
       @root_url = root_url
     end
 
+    def self.accounts
+      DB[:accounts]
+    end
+
     def self.exists?(identifier)
-      DB[:accounts].where(:identifier => identifier).to_a.count > 0
+      accounts.where(:identifier => identifier).count > 0
     end
 
     # def self.make_new_object(identifier)
@@ -18,15 +22,23 @@ module TrafficSpy
     # end
 
     def register
-      DB[:accounts].insert(
+      Account.accounts.insert(
         :identifier => @identifier,
         :root_url => @root_url)
       return true
     end
 
     def self.get_id(identifier)
-      account_row = DB[:accounts].where(:identifier => identifier).to_a
+      account_row = accounts.where(:identifier => identifier).to_a
       account_id = account_row[0][:id]
+    end
+
+    def self.destroy_all
+      accounts.delete
+    end
+
+    def self.count
+      accounts.count
     end
   end
 end

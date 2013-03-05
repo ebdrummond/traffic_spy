@@ -37,8 +37,15 @@ module TrafficSpy
       expect(OperatingSystem.make_new_object("Linux")).to be_kind_of(Integer)
     end
 
-    it "returns operating systems breakdown" do
-      expect(OperatingSystem.breakdown("jumpstartlab")).to be_kind_of(Hash)
+    context "when the os data is tied to an existing account" do
+      before(:each) do
+        Account.destroy_all
+        Account.new("jumpstartlab", "http://jumpstartlab.com").register
+      end
+
+      it "returns operating systems breakdown" do
+        expect(OperatingSystem.breakdown("jumpstartlab")).to be_kind_of(Hash)
+      end
     end
   end
 end

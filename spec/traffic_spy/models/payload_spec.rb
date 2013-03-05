@@ -7,7 +7,11 @@ module TrafficSpy
     end
 
     let (:payload_instance) { Payload.new(@payload, "jumpstartlab") }
+    let(:account){ Account.new("jumpstartlab", "http://jumpstartlab.com") }
+
     before(:each) do
+      Account.destroy_all
+      account.register
       @payload = {
           "url" => "http://jumpstartlab.com",
           "requestedAt" => "2013-02-16 21:38:26 -0700",

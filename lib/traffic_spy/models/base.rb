@@ -9,6 +9,7 @@ require 'traffic_spy/models/event'
 require 'traffic_spy/models/account'
 require 'traffic_spy/models/campaign'
 require 'traffic_spy/models/campaign_event'
+require 'traffic_spy/models/response'
 
 module TrafficSpy
 

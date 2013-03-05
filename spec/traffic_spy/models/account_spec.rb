@@ -4,24 +4,46 @@ module TrafficSpy
   describe Account do
 
     before(:each) do
-      @account = Account.new("jumpstartlab", "http://jumpstartlab.com")
+      Account.destroy_all
     end
+
+    let(:account){ Account.new("jumpstartlab", "http://jumpstartlab.com") }
 
     it "exists" do
       Account.should be
     end
 
     it "checks to see if there is already an account in the database" do
-      expect(Account.exists?(@account.identifier)).to be true
+      account.register
+      expect( Account.exists?(account.identifier) ).to be
     end
 
-    it "registers a new account using the parameters from the post request" do
-      expect(@account.register).to be true
+    describe "#register" do
+      it "registers a new account using the parameters from the post request" do
+        expect(account.register).to be
+      end
+    end
+
+    describe ".destroy_all" do
+      it "removes all accounts" do
+        account.register
+        Account.destroy_all
+        expect( Account.count ).to eq 0
+      end
+    end
+
+    describe ".count" do
+      it "counts the accounts" do
+        expect{ account.register }.to change{ Account.count }.by(1)
+      end
     end
 
     # it "returns a 403 status code for a duplicate account" do
-    #   post "/sources", @account
+    #   post "/sources", account
     #   last_response.status.should eq 403
     # end
+    describe ".get_id" do
+      it "raises an exception or something if it is not found"
+    end
   end
 end

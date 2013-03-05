@@ -22,22 +22,26 @@ module TrafficSpy
     end
 
     post '/sources' do
-      @identifier = params[:identifier]
-      @rootUrl = params[:rootUrl]
-      if !@identifier || !@rootUrl
-        status 400
-        body "Sorry, but your request is missing required parameters.  Please try again."
-      elsif Account.exists?(@identifier)
-        @exists = true
-        status 403
-        body "Sorry, but #{@identifier} already exists in our database."
+      identifier = params[:identifier]
+      rootUrl    = params[:rootUrl]
+
+      if !identifier || !params[:rootUrl]
+        message  = "Sorry, but your request is missing required parameters.  Please try again."
+        response = Response.new(400, message)
+      elsif Account.exists?(identifier)
+        response = Response.new(403, "Sorry, but #{identifier} already exists in our database.")
       else
-        @exists = false
-        account = Account.new(@identifier, @rootUrl)
-        account.register
-        status 200
-        body '{"identifier":"' + @identifier +'"}'
+        account = Account.new(identifier, rootUrl)
+        account.register       
+        response = Response.new(200, '{"identifier":"' + identifier +'"}')
       end
+
+      response_for(response)
+    end
+
+    def response_for(response)
+      status response.status
+      body   response.body
     end
 
     post '/sources/:identifier/data' do
