@@ -21,22 +21,6 @@ module TrafficSpy
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211" 
         }.to_json
-
-      # @delegate_return_value = {
-      #   "account_id" => 1,
-      #   "http_request" => "get",
-      #   "query_strings" => "[]",
-      #   "url_id" => 1,
-      #   "referrer_id" => 1,
-      #   "event_id" => 1,
-      #   "resolution_id" => 1,
-      #   "ip_address_id" => 1,
-      #   "browser_id" => 1,
-      #   "operating_systems_id" => 1,
-      #   "requested_at" => "2013-02-16 21:38:26 -0700",
-      #   "hour_of_day" => "21",
-      #   "responded_in" => 30
-      #   }
     end
 
     describe ".parse" do

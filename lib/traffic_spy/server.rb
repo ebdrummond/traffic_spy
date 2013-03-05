@@ -1,6 +1,5 @@
 require 'sinatra'
 
-
 module TrafficSpy
 
   # Sinatra::Base - Middleware, Libraries, and Modular Apps
@@ -18,7 +17,6 @@ module TrafficSpy
     set :public_folder, 'lib/public'
 
     get '/' do
-      #'hello'
       erb :index
     end
 
@@ -57,6 +55,9 @@ module TrafficSpy
       elsif Account.exists?(@identifier) && Payload.new?(payload_ruby_hash) == false
         status 403
         body "Sorry, but this payload already exists in our database."
+      elsif Account.exists?(@identifier) == false
+        status 403
+        body "This application is not yet registered.  Please register and try again."
       end
     end
 

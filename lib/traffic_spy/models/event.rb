@@ -51,12 +51,6 @@ module TrafficSpy
       event_id = event_row[0][:id]
     end
 
-    # def self.get_hour_of_day
-    #   requested_at = DB[:payloads].where(:requested_at => requested_at)
-    #   requested_parts = requested_at.split(" ")
-    #   requested_parts[1][0..1]
-    # end
-
     def self.registration_times(identifier, event_name)
       events = DB[:events]
       payloads = DB[:payloads]
