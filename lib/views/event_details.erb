@@ -68,7 +68,12 @@
             <!-- Table Body -->
 
             <tbody>
-              <%= @reg_times %>
+              <% @reg_times.each do |reg_times, index| %>
+              <tr>
+                <td><%= reg_times %></td>
+                <td><%= index %></td>
+              </tr>
+              <% end %>
             </tbody>
             <!-- Table Body -->
 

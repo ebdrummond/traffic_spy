@@ -70,11 +70,9 @@ module TrafficSpy
         requested_at = payload_row[:requested_at].to_s
         requested_parts = requested_at.split(" ")
         reg_hours = requested_parts[1][0..1]
+        event_reg_time_hash[reg_hours] += payload_row[:count]
       end
-      #have - array of hashes showing requested at and count of requests
-      #[{:requested_at=>1915-07-02 05:17:28 -0700, :count=>1}, {:requested_at=>1915-08-02 05:17:28 -0700, :count=>1}] 
-      #need - hours of event registration and count
-      puts event_reg_hours_by_count
+      event_reg_time_hash
     end
   end
 end
