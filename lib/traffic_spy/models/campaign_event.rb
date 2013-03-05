@@ -6,8 +6,10 @@ module TrafficSpy
       @event_id = event_id
     end
 
-    def register
+    def register(identifier)
+      account_id = Account.get_id(identifier)
       DB[:campaign_events].insert(
+        :account_id => account_id,
         :campaign_id => @campaign_id,
         :event_id => @event_id)
       return true
