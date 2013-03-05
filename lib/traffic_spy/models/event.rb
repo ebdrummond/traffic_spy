@@ -45,5 +45,45 @@ module TrafficSpy
       end
       event_sorted_hash
     end
+
+    def self.get_id(event)
+      event_row = DB[:events].where(:event => event).to_a
+      event_id = event_row[0][:id]
+    end
+
+    def self.registration_times(identifier, event_name)
+      events = DB[:events]
+      payloads = DB[:payloads]
+      account_id = Account.get_id(identifier)
+      event_id = get_id(event_name)
+
+      event_reg_time_hash = Hash.new(0)
+      event_reg_hours_by_count = payloads.where(:account_id => account_id).where(:event_id => event_id).group_and_count(:requested_at)
+      
+      event_reg_hours_by_count.each do |payload_row|
+        requested_at = payload_row[:requested_at]
+        reg_hours = requested_at.strftime("%I:00 %P")
+        event_reg_time_hash[reg_hours] += payload_row[:count]
+      end
+      event_reg_time_hash
+    end
+
+    # def self.registration_times(identifier, event_name)
+    #   events = DB[:events]
+    #   payloads = DB[:payloads]
+    #   account_id = Account.get_id(identifier)
+    #   event_id = get_id(event_name)
+
+    #   event_reg_time_hash = Hash.new(0)
+    #   event_reg_hours_by_count = payloads.where(:account_id => account_id).where(:event_id => event_id).group_and_count(:requested_at)
+      
+    #   event_reg_hours_by_count.each do |payload_row|
+    #     requested_at = payload_row[:requested_at].to_s
+    #     requested_parts = requested_at.split(" ")
+    #     reg_hours = requested_parts[1][0..1]
+    #     event_reg_time_hash[reg_hours] += payload_row[:count]
+    #   end
+    #   event_reg_time_hash
+    # end
   end
 end
