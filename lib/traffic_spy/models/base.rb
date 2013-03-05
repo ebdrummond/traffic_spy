@@ -7,6 +7,8 @@ require 'traffic_spy/models/browser'
 require 'traffic_spy/models/resolution'
 require 'traffic_spy/models/event'
 require 'traffic_spy/models/account'
+require 'traffic_spy/models/campaign'
+require 'traffic_spy/models/campaign_event'
 
 module TrafficSpy
 

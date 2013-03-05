@@ -94,10 +94,57 @@ module TrafficSpy
         @response_times = Url.response_times(@identifier, @path)
       end
       erb :urls
-    end    
+    end
+
+    post '/sources/:identifier/campaigns' do
+      @identifier = params[:identifier]
+      @campaign = params[:campaignName].to_s
+      @events = params[:eventNames]
+      if @campaign == ""
+        status 400
+        body "Sorry, but your request is missing required parameters.  Please try again."
+      elsif @events == nil || @events.empty?
+        status 400
+        body "Sorry, but your request is missing required parameters.  Please try again."
+      elsif Campaign.exists?(@campaign)
+        status 403
+        body "Sorry, but #{@campaign} already exists in our database."
+      elsif Account.exists?(@identifier)
+        campaign = Campaign.new(@campaign)
+        campaign.register
+        campaign_id = Campaign.get_id(@campaign)
+
+        @events.each do |event|
+          if Event.exists?(event) == false
+            new_event = Event.new(event)
+            new_event.register
+            new_event_id = Event.get_id(event)
+            campaign_event = CampaignEvent.new(campaign_id, new_event_id)
+            campaign_event.register
+          else
+            event_id = Event.get_id(event)
+            campaign_event = CampaignEvent.new(campaign_id, event_id)
+            campaign_event.register
+          end
+        end
+        status 200
+        body 'Thanks! Information is available in your dashboard.'
+      else
+        status 400
+        body "Something went wrong. Try again."
+      end
+    end
+
+    get '/sources/:identifier/campaigns' do
+      # @identifier = params[:identifier]
+      # if Campaign.exists?
+      #   @campaigns_and_events = CampaignEvent.campaign_event_count(@identifier)
+      # end
+      erb :campaigns
+    end
 
     not_found do
-      erb :error
+      erb :event_error
     end
   end
 end

@@ -46,9 +46,9 @@
             <i class="icon-dashboard"></i>Dashboard
           </a>
         </li>
-        <li><a href="#" class="active"><i class="icon-copy"></i>Pages</a></li>
+        <li><a href="#"><i class="icon-copy"></i>Pages</a></li>
         <li><a href="#"><i class="icon-time"></i>Response Times</a></li>
-        <li><a href="#"><i class="icon-money"></i>Campaigns</a></li>
+        <li><a href="#" class="active"><i class="icon-money"></i>Campaigns</a></li>
         <li><a href="#"><i class="icon-group"></i>Events</a></li>
         <li><a href="#"><i class="icon-cogs"></i>Operating Systems</a></li>
         <li><a href="#"><i class="icon-laptop"></i>Screen Resolutions</a></li>
@@ -57,9 +57,8 @@
 
     <div id="content" class="large-10 columns">
       <div id="content-inner">
-        <% if @url_exists == true %>
         <div class="full-table">
-          <h3>Response Times For <em>"<%= @path %>"</em></h3>
+          <h3>Campaigns</h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
             <thead>
@@ -84,9 +83,6 @@
 
           </table>
         </div>
-        <% else %>
-        <p>That URL doesn't exists.</p>
-        <% end %>
       </div>
     </div>
   </div>

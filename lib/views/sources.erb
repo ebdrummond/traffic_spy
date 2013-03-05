@@ -14,9 +14,11 @@
   
 
   <script src="js/vendor/custom.modernizr.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 </head>
 <body>
+  <div id="blank"></div>
   <nav class="top-bar">
     <ul class="title-area">
       <!-- Title Area -->
@@ -41,7 +43,11 @@
   <div id="main" class="row">
     <div id="sub-nav" class="large-2 columns">
       <ul class="sub-nav">
-        <li><a href="#" class="active"><i class="icon-dashboard"></i>Dashboard</a></li>
+        <li>
+          <a href="/sources/<% @identifier %>" class="active">
+            <i class="icon-dashboard"></i>Dashboard
+          </a>
+        </li>
         <li><a href="#"><i class="icon-copy"></i>Pages</a></li>
         <li><a href="#"><i class="icon-time"></i>Response Times</a></li>
         <li><a href="#"><i class="icon-money"></i>Campaigns</a></li>
