@@ -131,12 +131,12 @@ module TrafficSpy
             new_event = Event.new(event)
             new_event.register
             new_event_id = Event.get_id(event)
-            campaign_event = CampaignEvent.new(campaign_id, new_event_id)
-            campaign_event.register(@identifier)
+            campaign_event = CampaignEvent.new(@identifier, campaign_id, new_event_id)
+            campaign_event.register
           else
             event_id = Event.get_id(event)
-            campaign_event = CampaignEvent.new(campaign_id, event_id)
-            campaign_event.register(@identifier)
+            campaign_event = CampaignEvent.new(@identifier, campaign_id, event_id)
+            campaign_event.register
           end
         end
         status 200

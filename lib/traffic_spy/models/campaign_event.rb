@@ -1,7 +1,8 @@
 module TrafficSpy
   class CampaignEvent
 
-    def initialize(campaign_id, event_id)
+    def initialize(identifier, campaign_id, event_id)
+      @identifier = identifier
       @campaign_id = campaign_id
       @event_id = event_id
     end
@@ -11,8 +12,8 @@ module TrafficSpy
       DB[:campaign_events].where(:account_id => account_id).to_a.count > 0
     end
 
-    def register(identifier)
-      account_id = Account.get_id(identifier)
+    def register
+      account_id = Account.get_id(@identifier)
       DB[:campaign_events].insert(
         :account_id => account_id,
         :campaign_id => @campaign_id,
