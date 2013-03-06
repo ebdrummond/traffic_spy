@@ -38,8 +38,8 @@ module TrafficSpy
 
       context "when the identifier is already taken" do
         it "returns 403 with a message" do
-          post '/sources', {:identifier => 'erin', :rootUrl => "http://erin.com"}
-          post '/sources', {:identifier => 'erin', :rootUrl => "http://erin.com"}
+          post '/sources', {:identifier => 'erin', :rootUrl => "http://ern.com"}
+          post '/sources', {:identifier => 'erin', :rootUrl => "http://ern.com"}
           last_response.status.should eq 403
           last_response.body.should include("already exists")
         end
@@ -47,7 +47,7 @@ module TrafficSpy
 
       context "when there are valid and unique parameters" do
         it "returns 200 with the correct message" do
-          post '/sources', {:identifier => 'erin', :rootUrl => "http://erin.com"}
+          post '/sources', {:identifier => 'erin', :rootUrl => "http://ern.com"}
           last_response.status.should eq 200
           last_response.body.should include('{"identifier":"erin"}')
         end
@@ -67,7 +67,9 @@ module TrafficSpy
           "requestType" => "GET",
           "parameters" => [],
           "eventName" => "socialLogin",
-          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "userAgent" =>  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) " +
+                          "AppleWebKit/537.17 (KHTML, like Gecko) " +
+                          "Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211"
@@ -80,7 +82,9 @@ module TrafficSpy
           "requestType" => "GET",
           "parameters" => [],
           "eventName" => "someEvent",
-          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "userAgent" =>  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) " +
+                          "AppleWebKit/537.17 (KHTML, like Gecko) " +
+                          "Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211"
@@ -93,7 +97,9 @@ module TrafficSpy
           "requestType" => "GET",
           "parameters" => [],
           "eventName" => "",
-          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "userAgent" =>  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) " +
+                          "AppleWebKit/537.17 (KHTML, like Gecko) " +
+                          "Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211"
@@ -106,7 +112,9 @@ module TrafficSpy
           "requestType" => "GET",
           "parameters" => [],
           "eventName" => "",
-          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "userAgent" =>  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) " +
+                          "AppleWebKit/537.17 (KHTML, like Gecko) " +
+                          "Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211"
@@ -197,7 +205,9 @@ module TrafficSpy
           "requestType" => "GET",
           "parameters" => [],
           "eventName" => "socialLogin",
-          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "userAgent" =>  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) " +
+                          "AppleWebKit/537.17 (KHTML, like Gecko) " +
+                          "Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211"
@@ -255,7 +265,7 @@ module TrafficSpy
 
       context "when the account doesn't exist and no params are missing" do
         it "returns a 400 status message" do
-          post '/sources/anything/campaigns', { :campaignName => "some_campaign",
+          post '/sources/anything/campaigns', {:campaignName => "some_campaign",
                                             :eventNames => "some_events"}
           last_response.status.should eq 400
         end
@@ -274,7 +284,9 @@ module TrafficSpy
           "requestType" => "GET",
           "parameters" => [],
           "eventName" => "socialLogin",
-          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "userAgent" =>  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) " +
+                          "AppleWebKit/537.17 (KHTML, like Gecko) " +
+                          "Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211"
