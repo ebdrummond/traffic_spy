@@ -6,12 +6,20 @@ module TrafficSpy
       @event = input
     end
 
+    def self.destroy_all
+      events.delete
+    end
+
+    def self.events
+      DB[:events]
+    end
+
     def self.exists?(event)
-      DB[:events].where(:event => event).to_a.count > 0
+      events.where(:event => event).to_a.count > 0
     end
 
     def self.get_id(event)
-      event_row = DB[:events].where(:event => event).to_a
+      event_row = events.where(:event => event).to_a
       event_id = event_row[0][:id]
     end
 
@@ -30,12 +38,11 @@ module TrafficSpy
     end
 
     def register
-      DB[:events].insert(:event => @event)
+      Event.events.insert(:event => @event)
       return true
     end
 
     def self.sorted_events(identifier)
-      events = DB[:events]
       payloads = DB[:payloads]
       account_id = Account.get_id(identifier)
 
@@ -43,7 +50,7 @@ module TrafficSpy
       event_ids_by_count = payloads.where(:account_id => account_id).join(:events, :id => :event_id).group_and_count(:event_id).order(Sequel.desc(:count))
       event_ids_by_count.to_a.each do |event_row|
         event_id = event_row[:event_id]
-        actual_event_query = DB[:events].where(:id => event_id).to_a
+        actual_event_query = events.where(:id => event_id).to_a
         actual_event = actual_event_query[0][:event]
         event_sorted_hash[actual_event] += event_row[:count]
       end
@@ -55,7 +62,6 @@ module TrafficSpy
     end
 
     def self.registration_times(identifier, event_name)
-      events = DB[:events]
       payloads = DB[:payloads]
       account_id = Account.get_id(identifier)
       event_id = get_id(event_name)

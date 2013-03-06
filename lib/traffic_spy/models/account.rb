@@ -16,11 +16,6 @@ module TrafficSpy
       accounts.where(:identifier => identifier).count > 0
     end
 
-    # def self.make_new_object(identifier)
-    #   account_row = DB[:accounts].where(:identifier => identifier).to_a
-    #   account_id = account_row[0][:id]
-    # end
-
     def register
       Account.accounts.insert(
         :identifier => @identifier,

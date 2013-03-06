@@ -6,12 +6,20 @@ module TrafficSpy
       @browser = input
     end
 
+    def self.destroy_all
+      browsers.delete
+    end
+
+    def self.browsers
+      DB[:browsers]
+    end
+
     def self.exists?(browser)
-      DB[:browsers].where(:browser => browser).to_a.count > 0
+      browsers.where(:browser => browser).to_a.count > 0
     end
 
     def self.get_id(browser)
-      browser_row = DB[:browsers].where(:browser => browser).to_a
+      browser_row = browsers.where(:browser => browser).to_a
       browser_id = browser_row[0][:id]
     end
 
@@ -26,12 +34,11 @@ module TrafficSpy
     end
 
     def register
-      DB[:browsers].insert(:browser => @browser)
+      Browser.browsers.insert(:browser => @browser)
       return true
     end
 
     def self.breakdown(identifier)
-      browsers = DB[:browsers]
       payloads = DB[:payloads]
       account_id = Account.get_id(identifier)
 
@@ -39,7 +46,7 @@ module TrafficSpy
       browsers_by_account_id = payloads.where(:account_id => account_id).join(:browsers, :id => :browser_id).group_and_count(:browser_id).order(Sequel.desc(:count))
       browsers_by_account_id.to_a.each do |browser_row|
         browser_id = browser_row[:browser_id]
-        actual_browser_query = DB[:browsers].where(:id => browser_id).to_a
+        actual_browser_query = browsers.where(:id => browser_id).to_a
         actual_browser = actual_browser_query[0][:browser]
         browsers_hash[actual_browser] += browser_row[:count]
       end

@@ -6,12 +6,20 @@ module TrafficSpy
       @referring_url = input
     end
 
+    def self.destroy_all
+      referring_urls.delete
+    end
+
+    def self.referring_urls
+      DB[:referring_urls]
+    end
+
     def self.exists?(referring_url)
-      DB[:referring_urls].where(:referring_url => referring_url).to_a.count > 0
+      referring_urls.where(:referring_url => referring_url).to_a.count > 0
     end
 
     def self.get_id(referring_url)
-      referring_url_row = DB[:referring_urls].where(:referring_url => referring_url).to_a
+      referring_url_row = referring_urls.where(:referring_url => referring_url).to_a
       referring_url_id = referring_url_row[0][:id]
     end
 
@@ -26,7 +34,7 @@ module TrafficSpy
     end
 
     def register
-      DB[:referring_urls].insert(:referring_url => referring_url)
+      ReferringUrl.referring_urls.insert(:referring_url => referring_url)
       return true
     end
   end

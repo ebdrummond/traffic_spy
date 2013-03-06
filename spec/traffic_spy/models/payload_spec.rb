@@ -51,16 +51,10 @@ module TrafficSpy
         expect(Payload.new?(parse_to_ruby)).to be_false
       end
 
-      it "generates the hour of the day a request was made" do
-        parse_to_ruby = Payload.parse(@payload)
-        payload = Payload.new(parse_to_ruby, "jumpstartlab")
-        expect(payload.get_hour_of_day).to eq "21"
-      end
-
       it "parses the 'problem' objects in the payload" do
         parse_to_ruby = Payload.parse(@payload)
         payload = Payload.new(parse_to_ruby, "jumpstartlab")
-        expect(payload.parse_payload_further).to eq "21"
+        expect(payload.parse_payload_further).to eq "Mac OS X"
       end
 
       it "creates a new account object" do

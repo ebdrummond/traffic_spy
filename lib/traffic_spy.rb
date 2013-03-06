@@ -28,8 +28,9 @@ require "traffic_spy/version"
 
 #Figure out PG
 #Push to Heroku
-#Run spec harness
-#hour by hour breakdown correct?
+
+
+
 #/ at end of page??
 #events from campaign events? not showing up on events page (sourced from payloads)
 

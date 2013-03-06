@@ -6,12 +6,20 @@ module TrafficSpy
       @ip_address = input
     end
 
+    def self.destroy_all
+      ip_addresses.delete
+    end
+
+    def self.ip_addresses
+      DB[:ip_addresses]
+    end
+
     def self.exists?(ip_address)
-      DB[:ip_addresses].where(:ip_address => ip_address).to_a.count > 0
+      ip_addresses.where(:ip_address => ip_address).to_a.count > 0
     end
 
     def self.get_id(ip_address)
-      ip_address_row = DB[:ip_addresses].where(:ip_address => ip_address).to_a
+      ip_address_row = ip_addresses.where(:ip_address => ip_address).to_a
       ip_address_id = ip_address_row[0][:id]
     end
 
@@ -26,7 +34,7 @@ module TrafficSpy
     end
 
     def register
-      DB[:ip_addresses].insert(:ip_address => @ip_address)
+      IpAddress.ip_addresses.insert(:ip_address => @ip_address)
       return true
     end
   end

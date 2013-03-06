@@ -6,13 +6,21 @@ module TrafficSpy
       @operating_system = input
     end
 
+    def self.operating_systems
+      DB[:operating_systems]
+    end
+
     def self.exists?(operating_system)
-      DB[:operating_systems].where(:operating_system => operating_system).to_a.count > 0
+      operating_systems.where(:operating_system => operating_system).to_a.count > 0
     end
 
     def self.get_id(operating_system)
-      operating_system_row = DB[:operating_systems].where(:operating_system => operating_system).to_a
+      operating_system_row = operating_systems.where(:operating_system => operating_system).to_a
       operating_system_id = operating_system_row[0][:id]
+    end
+
+    def self.destroy_all
+      operating_systems.delete
     end
 
     def self.make_new_object(operating_system)
@@ -26,12 +34,11 @@ module TrafficSpy
     end
 
     def register
-      DB[:operating_systems].insert(:operating_system => @operating_system)
+      OperatingSystem.operating_systems.insert(:operating_system => @operating_system)
       return true
     end
 
     def self.breakdown(identifier)
-      operating_systems = DB[:operating_systems]
       payloads = DB[:payloads]
       account_id = Account.get_id(identifier)
 
@@ -39,7 +46,7 @@ module TrafficSpy
       os_by_account_id = payloads.where(:account_id => account_id).join(:operating_systems, :id => :operating_system_id).group_and_count(:operating_system_id).order(Sequel.desc(:count))
       os_by_account_id.to_a.each do |os_row|
         os_id = os_row[:operating_system_id]
-        actual_os_query = DB[:operating_systems].where(:id => os_id).to_a
+        actual_os_query = operating_systems.where(:id => os_id).to_a
         actual_os = actual_os_query[0][:operating_system]
         os_hash[actual_os] += os_row[:count]
       end

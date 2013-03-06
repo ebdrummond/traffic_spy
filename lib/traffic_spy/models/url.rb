@@ -6,12 +6,20 @@ module TrafficSpy
       @url = input
     end
 
+    def self.urls
+      DB[:urls]
+    end
+
+    def self.destroy_all
+
+    end
+
     def self.exists?(url)
-      DB[:urls].where(:url => url).to_a.count > 0
+      urls.where(:url => url).to_a.count > 0
     end
 
     def self.get_id(url)
-      url_row = DB[:urls].where(:url => url).to_a
+      url_row = urls.where(:url => url).to_a
       url_id = url_row[0][:id]
     end
 
@@ -26,7 +34,7 @@ module TrafficSpy
     end
 
     def register
-      DB[:urls].insert(:url => @url)
+      Url.urls.insert(:url => @url)
       return true
     end
 
@@ -41,7 +49,6 @@ module TrafficSpy
     end
 
     def self.sorted_urls(identifier)
-      urls = DB[:urls]
       payloads = DB[:payloads]
       account_id = Account.get_id(identifier)
 
@@ -49,7 +56,7 @@ module TrafficSpy
       url_ids_by_count = payloads.where(:account_id => account_id).join(:urls, :id => :url_id).group_and_count(:url_id).order(Sequel.desc(:count))
       url_ids_by_count.to_a.each do |url_row|
         url_id = url_row[:url_id]
-        actual_url_query = DB[:urls].where(:id => url_id).to_a
+        actual_url_query = urls.where(:id => url_id).to_a
         actual_url = actual_url_query[0][:url]
         url_sorted_hash[actual_url] += url_row[:count]
       end
@@ -58,10 +65,9 @@ module TrafficSpy
 
     def self.response_times(identifier, url_path)
       payloads = DB[:payloads]
-      urls = DB[:urls]
       account_id = Account.get_id(identifier)
 
-      url_id_query = DB[:urls].where(:url => url_path).to_a
+      url_id_query = urls.where(:url => url_path).to_a
       url_id = url_id_query[0][:id]
 
       response_by_date = Hash.new{0}
@@ -75,7 +81,6 @@ module TrafficSpy
     def self.average_response_times(identifier)
       # TODO make this less janky!!!!
       payloads = DB[:payloads]
-      urls = DB[:urls]
       account_id = Account.get_id(identifier)
 
       response_by_avg = Hash.new{0}
@@ -83,7 +88,7 @@ module TrafficSpy
       account_payloads = payloads.where(:account_id => account_id).order(Sequel.desc(:responded_in))
       account_payloads.to_a.each do |payload_row|
         url_id = payload_row[:url_id]
-        actual_url_query = DB[:urls].where(:id => url_id).to_a
+        actual_url_query = urls.where(:id => url_id).to_a
         actual_url = actual_url_query[0][:url]
         response_by_avg[actual_url] += payload_row[:responded_in]
       end

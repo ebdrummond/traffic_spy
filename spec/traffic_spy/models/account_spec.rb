@@ -4,6 +4,7 @@ module TrafficSpy
   describe Account do
 
     before(:each) do
+      Payload.destroy_all
       Account.destroy_all
     end
 
@@ -38,10 +39,6 @@ module TrafficSpy
       end
     end
 
-    # it "returns a 403 status code for a duplicate account" do
-    #   post "/sources", account
-    #   last_response.status.should eq 403
-    # end
     describe ".get_id" do
       it "raises an exception or something if it is not found"
     end

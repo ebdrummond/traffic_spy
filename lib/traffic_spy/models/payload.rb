@@ -38,8 +38,12 @@ module TrafficSpy
       JSON.parse(input)
     end
 
+    def self.payloads
+      DB[:payloads]
+    end
+
     def self.new?(payload)
-      DB[:payloads].where(:requested_at => payload["requestedAt"]).to_a.count < 1
+      payloads.where(:requested_at => payload["requestedAt"]).to_a.count < 1
     end
 
     def self.params_missing?(payload)
@@ -51,12 +55,10 @@ module TrafficSpy
       user_agent = AgentOrange::UserAgent.new(@user_agent)
       @browser = user_agent.device.engine.browser.name
       @operating_system = user_agent.device.operating_system.name
-      @hour_of_day = get_hour_of_day
     end
 
-    def get_hour_of_day
-      requested_parts = @requested_at.split(" ")
-      requested_parts[1][0..1]
+    def self.destroy_all
+      payloads.delete
     end
 
     def generate_account_id
@@ -110,7 +112,6 @@ module TrafficSpy
       :browser_id => generate_browser_id,
       :operating_system_id => generate_operating_system_id,
       :requested_at => @requested_at,
-      :hour_of_day => get_hour_of_day,
       :responded_in => @responded_in)
       return true
     end
