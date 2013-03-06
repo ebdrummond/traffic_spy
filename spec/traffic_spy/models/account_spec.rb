@@ -38,9 +38,5 @@ module TrafficSpy
         expect{ account.register }.to change{ Account.count }.by(1)
       end
     end
-
-    describe ".get_id" do
-      it "raises an exception or something if it is not found"
-    end
   end
 end

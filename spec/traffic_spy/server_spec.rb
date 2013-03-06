@@ -150,7 +150,7 @@ module TrafficSpy
 
     describe "event pages" do
       context "when all of the events are empty" do
-        xit "returns a 403 status message" do
+        it "returns a 403 status message" do
           Event.destroy_all
           Account.new("erin", "http://www.erin.com").register
           post '/sources/erin/data', {:payload => @payload_missing_event }
