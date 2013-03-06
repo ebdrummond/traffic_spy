@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'rack/test'
+require 'json'
 
 module TrafficSpy
   describe Server do
@@ -50,6 +51,93 @@ module TrafficSpy
           last_response.status.should eq 200
           last_response.body.should include('{"identifier":"erin"}')
         end
+      end
+    end
+
+    describe "payload" do
+
+      before(:each) do
+      Account.destroy_all
+      Payload.destroy_all
+      @payload = {
+          "url" => "http://jumpstartlab.com",
+          "requestedAt" => "2013-02-16 21:38:26 -0700",
+          "respondedIn" => 30,
+          "referredBy" => "http://jumpstartlab.com",
+          "requestType" => "GET",
+          "parameters" => [],
+          "eventName" => "socialLogin",
+          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "resolutionWidth" => "1920",
+          "resolutionHeight" => "1280",
+          "ip" => "63.29.38.211" 
+        }.to_json
+        @payload_missing = {
+          "url" => "",
+          "requestedAt" => "2013-02-16 21:38:26 -0700",
+          "respondedIn" => 30,
+          "referredBy" => "http://jumpstartlab.com",
+          "requestType" => "GET",
+          "parameters" => [],
+          "eventName" => "socialLogin",
+          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "resolutionWidth" => "1920",
+          "resolutionHeight" => "1280",
+          "ip" => "63.29.38.211" 
+        }.to_json
+      end
+
+      context "when a parameter is missing" do
+        it "returns with a 400 message" do
+          post '/sources/erin/data', {:payload => @payload_missing }
+          last_response.status.should eq 400
+        end
+      end
+
+      context "when the account exists and the payload is new" do
+        it "returns a 200 status message" do
+          Account.new("erin", "http://www.erin.com").register
+          post '/sources/erin/data', {:payload => @payload }
+          last_response.status.should eq 200
+        end
+      end
+
+      context "when the account exists and the payload is not new" do
+        it "returns a 403 status message" do
+          Account.new("erin", "http://www.erin.com").register
+          2.times { post '/sources/erin/data', {:payload => @payload } }
+          last_response.status.should eq 403
+        end
+      end
+
+      context "when the account doesn't exist" do
+        it "returns a 403 status message" do
+          post '/sources/erin/data', {:payload => @payload }
+          last_response.status.should eq 403
+        end
+      end
+    end
+
+    describe "identifier pages" do
+      context "when the account exists" do
+        it "returns a 200 status message" do
+          Account.new("erin", "http://www.erin.com").register
+          get '/sources/erin', {}
+          last_response.status.should eq 200
+        end
+      end
+
+      context "when the account doesn't exist" do
+        it "returns a 403 status message" do
+          get '/sources/aosidhasd', {}
+          last_response.status.should eq 403
+        end
+      end
+    end
+
+    describe "event pages" do
+      context "when all of the events are empty" do
+        it ""
       end
     end
 

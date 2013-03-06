@@ -91,6 +91,10 @@ module TrafficSpy
       OperatingSystem.make_new_object(@operating_system)
     end
 
+    def self.destroy_all
+      DB[:payloads].delete
+    end
+
     def register
       parse_payload_further
 

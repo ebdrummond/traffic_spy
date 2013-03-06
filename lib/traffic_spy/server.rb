@@ -76,6 +76,7 @@ module TrafficSpy
         @avg_response_times = Url.average_response_times(@identifier)
         erb :sources
       else
+        status 403
         erb :identifier_error
       end
     end
@@ -83,11 +84,13 @@ module TrafficSpy
     get '/sources/:identifier/events' do
       @identifier = params[:identifier]
       if Event.sorted_events(@identifier).all?{|event, count| event == ""}
+        status 403
         erb :event_error
       elsif Account.exists?(@identifier)
         @sorted_events = Event.sorted_events(@identifier)
         erb :event
       else
+        status 403
         erb :identifier_error
       end
     end
