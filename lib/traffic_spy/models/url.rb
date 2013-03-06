@@ -77,7 +77,7 @@ module TrafficSpy
       payloads_for_url = payloads.where(:account_id => account_id).
       where(:url_id => url_id).order(Sequel.desc(:responded_in))
       payloads_for_url.to_a.each do |pld_row|
-        response_by_date[pld_row[:requested_at]] = payload_row[:responded_in]
+        response_by_date[pld_row[:requested_at]] = pld_row[:responded_in]
       end
       response_by_date
     end

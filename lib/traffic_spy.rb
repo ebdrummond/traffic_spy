@@ -14,5 +14,5 @@ require "traffic_spy/version"
 
 #connection between campaigns and events erb
 #/ at end of page??
-#events from campaign events? not showing up on events page 
+#events from campaign events? not showing up on events page
 # (sourced from payloads)

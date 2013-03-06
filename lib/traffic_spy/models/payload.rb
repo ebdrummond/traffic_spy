@@ -1,5 +1,5 @@
 require 'json'
-require 'agent_orange'
+require 'useragent'
 
 module TrafficSpy
   class Payload
@@ -57,9 +57,9 @@ module TrafficSpy
     def parse_payload_further
       @resolution = Resolution.combine_resolutions(@resolution_width,
         @resolution_height)
-      user_agent = AgentOrange::UserAgent.new(@user_agent)
-      @browser = user_agent.device.engine.browser.name
-      @operating_system = user_agent.device.operating_system.name
+      user_agent = UserAgent.parse(@user_agent)
+      @browser = user_agent.browser
+      @operating_system = user_agent.platform
     end
 
     def self.destroy_all
