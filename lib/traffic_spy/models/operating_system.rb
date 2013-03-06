@@ -43,7 +43,7 @@ module TrafficSpy
       account_id = Account.get_id(identifier)
 
       os_hash = Hash.new(0)
-      os_by_account_id = payloads.where(:account_id => account_id).join(:operating_systems, :id => :operating_system_id).group_and_count(:operating_system_id).order(Sequel.desc(:count))
+      os_by_account_id = payloads.where(:account_id => account_id).join(:operating_systems, :id => :operating_system_id).group_and_count(:operating_system_id).order(Sequel.desc(:count)).exclude(:operating_system => "")
       os_by_account_id.to_a.each do |os_row|
         os_id = os_row[:operating_system_id]
         actual_os_query = operating_systems.where(:id => os_id).to_a
