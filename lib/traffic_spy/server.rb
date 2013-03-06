@@ -26,10 +26,12 @@ module TrafficSpy
       rootUrl    = params[:rootUrl]
 
       if !identifier || !params[:rootUrl]
-        message  = "Sorry, but your request is missing required parameters.  Please try again."
+        message  = "Sorry, but your request is missing required parameters." +
+        "  Please try again."
         response = Response.new(400, message)
       elsif Account.exists?(identifier)
-        response = Response.new(403, "Sorry, but #{identifier} already exists in our database.")
+        response = Response.new(403, "Sorry, but #{identifier} already" +
+        " exists in our database.")
       else
         account = Account.new(identifier, rootUrl)
         account.register
@@ -49,7 +51,8 @@ module TrafficSpy
       payload_hash = Payload.parse(params[:payload])
       if Payload.params_missing?(payload_hash) == true
         status 400
-        body "Sorry, but your request is missing required parameters.  Please try again."
+        body "Sorry, but your request is missing required parameters." +
+        "Please try again."
       elsif Account.exists?(@identifier) && Payload.new?(payload_hash)
         payload = Payload.new(payload_hash, @identifier)
         payload.register
@@ -60,7 +63,8 @@ module TrafficSpy
         body "Sorry, but this payload already exists in our database."
       elsif Account.exists?(@identifier) == false
         status 403
-        body "This application is not yet registered.  Please register and try again."
+        body "This application is not yet registered.  Please register" +
+        "and try again."
       end
     end
 
@@ -121,10 +125,12 @@ module TrafficSpy
       @events = params[:eventNames]
       if @campaign == nil || @campaign.empty?
         status 400
-        body "Sorry, but your request is missing required parameters.  Please try again."
+        body "Sorry, but your request is missing required parameters." +
+        "  Please try again."
       elsif @events == nil || @events.empty?
         status 400
-        body "Sorry, but your request is missing required parameters.  Please try again."
+        body "Sorry, but your request is missing required parameters." +
+        "  Please try again."
       elsif Campaign.exists?(@campaign)
         status 403
         body "Sorry, but #{@campaign} already exists in our database."
@@ -140,13 +146,13 @@ module TrafficSpy
           if Event.exists?(event) == false
             new_event = Event.new(event)
             new_event.register
-            new_event_id = Event.get_id(event)
-            campaign_event = CampaignEvent.new(@identifier, campaign_id, new_event_id)
+            neid = Event.get_id(event)
+            campaign_event = CampaignEvent.new(@identifier, campaign_id, neid)
             campaign_event.register
           else
             event_id = Event.get_id(event)
-            campaign_event = CampaignEvent.new(@identifier, campaign_id, event_id)
-            campaign_event.register
+            campaign_e = CampaignEvent.new(@identifier, campaign_id, event_id)
+            campaign_e.register
           end
         end
         status 200
