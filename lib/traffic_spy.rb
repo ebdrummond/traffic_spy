@@ -27,8 +27,6 @@ require "traffic_spy/version"
 #   "ip":"12.11.38.211"}'  http://localhost:9393/sources/jumpstartlab/data
 
 #Figure out PG
-#Push to Heroku
-
 
 
 #/ at end of page??
