@@ -25,7 +25,7 @@ module TrafficSpy
           expect(last_response.status).to eq 400
         end
 
-        it "returns a 400 bad request status when missing both the rootUrl and identifier" do
+        it "returns a 400 bad request status when missing both params" do
           post '/sources', {}
           last_response.status.should eq 400
         end
@@ -70,7 +70,7 @@ module TrafficSpy
           "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
-          "ip" => "63.29.38.211" 
+          "ip" => "63.29.38.211"
         }.to_json
         @payload_missing = {
           "url" => "",
@@ -83,7 +83,7 @@ module TrafficSpy
           "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
-          "ip" => "63.29.38.211" 
+          "ip" => "63.29.38.211"
         }.to_json
         @payload_missing_event = {
           "url" => "someurl",
@@ -96,7 +96,7 @@ module TrafficSpy
           "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
-          "ip" => "63.29.38.211" 
+          "ip" => "63.29.38.211"
         }.to_json
         @payload_missing_event2 = {
           "url" => "someurl",
@@ -109,7 +109,7 @@ module TrafficSpy
           "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
-          "ip" => "63.29.38.211" 
+          "ip" => "63.29.38.211"
         }.to_json
       end
 
@@ -167,7 +167,7 @@ module TrafficSpy
           Event.destroy_all
           Account.new("erin", "http://www.erin.com").register
           post '/sources/erin/data', {:payload => @payload_missing_event }
-          get '/sources/erin', {}
+          get '/sources/erin/events', {}
           last_response.status.should eq 403
         end
       end
@@ -180,7 +180,7 @@ module TrafficSpy
           post '/sources/erin/data', {:payload => @payload }
           get '/sources/erin/urls/ballin', {}
           last_response.status.should eq 200
-        end 
+        end
       end
     end
 
@@ -200,7 +200,7 @@ module TrafficSpy
           "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
-          "ip" => "63.29.38.211" 
+          "ip" => "63.29.38.211"
         }.to_json
       end
 
@@ -227,7 +227,7 @@ module TrafficSpy
                                             :eventNames => "some_events"}
           post '/sources/someguy/campaigns', { :campaignName => "some_campaign",
                                             :eventNames => "some_events"}
-          last_response.status.should eq 403                                  
+          last_response.status.should eq 403
         end
       end
 
@@ -277,7 +277,7 @@ module TrafficSpy
           "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
-          "ip" => "63.29.38.211" 
+          "ip" => "63.29.38.211"
         }.to_json
       end
 

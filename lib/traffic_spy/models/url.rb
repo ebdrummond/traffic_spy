@@ -71,7 +71,9 @@ module TrafficSpy
       url_id = url_id_query[0][:id]
 
       response_by_date = Hash.new{0}
-      payloads_for_url = payloads.where(:account_id => account_id).where(:url_id => url_id).order(Sequel.desc(:responded_in))
+      payloads_for_url = payloads.where(:account_id => account_id).
+                                  where(:url_id => url_id).
+                                  order(Sequel.desc(:responded_in))
       payloads_for_url.to_a.each do |payload_row|
         response_by_date[payload_row[:requested_at]] = payload_row[:responded_in]
       end
@@ -83,8 +85,10 @@ module TrafficSpy
       account_id = Account.get_id(identifier)
 
       response_by_avg = Hash.new{0}
-      account_payloads_count = payloads.where(:account_id => account_id).group_and_count(:url_id)
-      account_payloads = payloads.where(:account_id => account_id).order(Sequel.desc(:responded_in))
+      account_payloads_count = payloads.where(:account_id => account_id).
+                                        group_and_count(:url_id)
+      account_payloads = payloads.where(:account_id => account_id).
+                                  order(Sequel.desc(:responded_in))
       account_payloads.to_a.each do |payload_row|
         url_id = payload_row[:url_id]
         actual_url_query = urls.where(:id => url_id).to_a

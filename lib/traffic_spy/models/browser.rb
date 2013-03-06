@@ -43,7 +43,9 @@ module TrafficSpy
       account_id = Account.get_id(identifier)
 
       browsers_hash = Hash.new(0)
-      browsers_by_account_id = payloads.where(:account_id => account_id).join(:browsers, :id => :browser_id).group_and_count(:browser_id).order(Sequel.desc(:count))
+      browsers_by_account_id = payloads.where(:account_id => account_id).
+      join(:browsers, :id => :browser_id).group_and_count(:browser_id).
+      order(Sequel.desc(:count))
       browsers_by_account_id.to_a.each do |browser_row|
         browser_id = browser_row[:browser_id]
         actual_browser_query = browsers.where(:id => browser_id).to_a
