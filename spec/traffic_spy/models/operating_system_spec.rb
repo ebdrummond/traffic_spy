@@ -28,7 +28,8 @@ module TrafficSpy
     end
 
     it "makes a new object with a value that already exists" do
-      expect(OperatingSystem.make_new_object("Mac OS X")).to be_kind_of(Integer)
+      expect(OperatingSystem.make_new_object("Mac OS X")).
+      to be_kind_of(Integer)
     end
 
     it "makes a new object with a new operating_system" do
@@ -49,8 +50,9 @@ module TrafficSpy
           "requestType" => "GET",
           "parameters" => [],
           "eventName" => "socialLogin",
-          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
-          "resolutionWidth" => "1920",
+          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)" +
+            " AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0" +
+            " Safari/537.17",          "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
           "ip" => "63.29.38.211"
         }.to_json)
