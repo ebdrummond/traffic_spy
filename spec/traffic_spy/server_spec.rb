@@ -60,7 +60,7 @@ module TrafficSpy
       Account.destroy_all
       Payload.destroy_all
       @payload = {
-          "url" => "http://jumpstartlab.com",
+          "url" => "http://jumpstartlab.com/ballin",
           "requestedAt" => "2013-02-16 21:38:26 -0700",
           "respondedIn" => 30,
           "referredBy" => "http://jumpstartlab.com",
@@ -79,7 +79,7 @@ module TrafficSpy
           "referredBy" => "http://jumpstartlab.com",
           "requestType" => "GET",
           "parameters" => [],
-          "eventName" => "socialLogin",
+          "eventName" => "someEvent",
           "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
           "resolutionWidth" => "1920",
           "resolutionHeight" => "1280",
@@ -137,7 +137,144 @@ module TrafficSpy
 
     describe "event pages" do
       context "when all of the events are empty" do
-        it ""
+        xit "returns a 403 status message" do
+          Event.destroy_all
+          Account.new("erin", "http://www.erin.com").register
+          post '/sources/erin/data', {:payload => @payload_missing }
+          get '/sources/erin', {}
+          last_response.status.should eq 403
+        end
+      end
+    end
+
+    describe "urls pages" do
+      context "when the url exists" do
+        it "returns a 200 status message" do
+          Account.new("erin", "http://www.erin.com").register
+          post '/sources/erin/data', {:payload => @payload }
+          get '/sources/erin/urls/ballin', {}
+          last_response.status.should eq 200
+        end 
+      end
+    end
+
+    describe "campaigns pages" do
+
+      before(:each) do
+        Campaign.destroy_all
+        Event.destroy_all
+        @payload = {
+          "url" => "http://jumpstartlab.com/ballin",
+          "requestedAt" => "2013-02-16 21:38:26 -0700",
+          "respondedIn" => 30,
+          "referredBy" => "http://jumpstartlab.com",
+          "requestType" => "GET",
+          "parameters" => [],
+          "eventName" => "socialLogin",
+          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "resolutionWidth" => "1920",
+          "resolutionHeight" => "1280",
+          "ip" => "63.29.38.211" 
+        }.to_json
+      end
+
+      context "when the campaign is empty of nil" do
+        it "returns a 400 status message" do
+          Account.new("erin", "http://www.erin.com").register
+          post '/sources/erin/campaigns', {:campaignName => "some_campaign"}
+          last_response.status.should eq 400
+        end
+      end
+
+      context "when the campign is empty or nil" do
+        it "returns a 400 status message" do
+          Account.new("erin", "http://www.erin.com").register
+          post '/sources/erin/campaigns', {:eventNames => "some_events"}
+          last_response.status.should eq 400
+        end
+      end
+
+      context "when the campaign already exists" do
+        it "returns a 403 status message" do
+          Account.new("someguy", "http://www.erin.com").register
+          post '/sources/someguy/campaigns', { :campaignName => "some_campaign",
+                                            :eventNames => "some_events"}
+          post '/sources/someguy/campaigns', { :campaignName => "some_campaign",
+                                            :eventNames => "some_events"}
+          last_response.status.should eq 403                                  
+        end
+      end
+
+      context "when the account exists and no params are missing" do
+        it "registers everything" do
+          Account.new("erin", "http://www.erin.com").register
+          post '/sources/erin/data', {:payload => @payload }
+          post '/sources/erin/campaigns', { :campaignName => "some_campaign",
+                                            :eventNames => "some_events"}
+          last_response.status.should eq 200
+        end
+      end
+
+      context "when the account exists and no params are missing" do
+        it "registers everything" do
+          Account.new("erin", "http://www.erin.com").register
+          post '/sources/erin/data', {:payload => @payload }
+          post '/sources/erin/campaigns', { :campaignName => "some_campaign",
+                                            :eventNames => "some_events"}
+          post '/sources/erin/campaigns', { :campaignName => "new_campaign",
+                                            :eventNames => "some_events"}
+          last_response.status.should eq 200
+        end
+      end
+
+      context "when the account doesn't exist and no params are missing" do
+        it "returns a 400 status message" do
+          post '/sources/anything/campaigns', { :campaignName => "some_campaign",
+                                            :eventNames => "some_events"}
+          last_response.status.should eq 400
+        end
+      end
+    end
+
+    describe "campaigns pages" do
+      before(:each) do
+        Campaign.destroy_all
+        Event.destroy_all
+        @payload = {
+          "url" => "http://jumpstartlab.com/ballin",
+          "requestedAt" => "2013-02-16 21:38:26 -0700",
+          "respondedIn" => 30,
+          "referredBy" => "http://jumpstartlab.com",
+          "requestType" => "GET",
+          "parameters" => [],
+          "eventName" => "socialLogin",
+          "userAgent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17",
+          "resolutionWidth" => "1920",
+          "resolutionHeight" => "1280",
+          "ip" => "63.29.38.211" 
+        }.to_json
+      end
+
+      context "when a campaign event exists" do
+        it "returns a 200 status message" do
+          Account.new("someone", "http://www.someone.com").register
+          post '/sources/someone/data', {:payload => @payload }
+          post '/sources/someone/campaigns', { :campaignName => "some_campaign",
+                                            :eventNames => "some_events"}
+          get '/sources/someone/campaigns', {}
+          last_response.status.should eq 200
+        end
+      end
+
+      context "when someone goes to the specific campaign page" do
+        it "returns a 200 status message" do
+          Account.new("erin", "http://www.erin.com").register
+          post '/sources/erin/data', {:payload => @payload }
+          post '/sources/erin/campaigns', { :campaignName => "some_campaign",
+                                            :eventNames => "some_events"}
+          get '/sources/erin/campaigns/some_campaign', {}
+          last_response.status.should eq 200
+        end
       end
     end
 

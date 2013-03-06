@@ -120,7 +120,7 @@ module TrafficSpy
       @identifier = params[:identifier]
       @campaign = params[:campaignName].to_s
       @events = params[:eventNames]
-      if @campaign == ""
+      if @campaign == nil || @campaign.empty?
         status 400
         body "Sorry, but your request is missing required parameters.  Please try again."
       elsif @events == nil || @events.empty?
@@ -133,6 +133,9 @@ module TrafficSpy
         campaign = Campaign.new(@campaign)
         campaign.register
         campaign_id = Campaign.get_id(@campaign)
+        if @events.class == String
+          @events = Array.new << @events
+        end
 
         @events.each do |event|
           if Event.exists?(event) == false

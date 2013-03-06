@@ -32,3 +32,6 @@ require "traffic_spy/version"
 #hour by hour breakdown correct?
 #/ at end of page??
 #events from campaign events? not showing up on events page (sourced from payloads)
+
+# curl -i -d 'campaignName=socialSignup&eventNames[]=registrationStep1&eventNames[]=registrationStep2&eventNames[]=registrationStep3&eventNames[]=registrationStep4'  http://localhost:9393/sources/erin/campaigns
+# curl -i -d 'campaignName=socialSignup&eventNames[]=addedSocialThroughPromptB'  http://localhost:9393/sources/kyle/campaigns

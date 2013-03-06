@@ -25,6 +25,10 @@ module TrafficSpy
       end
     end
 
+    def self.destroy_all
+      DB[:campaigns].delete
+    end
+
     def register
       DB[:campaigns].insert(:campaign => @campaign)
       return true

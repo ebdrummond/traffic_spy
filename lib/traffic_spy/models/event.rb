@@ -25,6 +25,10 @@ module TrafficSpy
       end
     end
 
+    def self.destroy_all
+      DB[:events].delete
+    end
+
     def register
       DB[:events].insert(:event => @event)
       return true
@@ -44,6 +48,10 @@ module TrafficSpy
         event_sorted_hash[actual_event] += event_row[:count]
       end
       event_sorted_hash
+    end
+
+    def self.destroy_all
+      DB[:events].delete
     end
 
     def self.registration_times(identifier, event_name)
