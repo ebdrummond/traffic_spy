@@ -1,4 +1,4 @@
-ENV["TRAFFIC_SPY_ENV"] ||= "test"
+# ENV["TRAFFIC_SPY_ENV"] ||= "test"
 
 require 'sequel'
 require 'traffic_spy/models/base'
@@ -26,9 +26,7 @@ require "traffic_spy/version"
 #   "resolutionHeight":"980",
 #   "ip":"12.11.38.211"}'  http://localhost:9393/sources/jumpstartlab/data
 
-#Figure out PG
-
-
+#connection between campaigns and events erb
 #/ at end of page??
 #events from campaign events? not showing up on events page (sourced from payloads)
 

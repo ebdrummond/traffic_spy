@@ -1,6 +1,9 @@
+require 'time'
+require 'date'
+
 module TrafficSpy
   class Event
-    attr_reader :event
+    attr_reader :event, :reg_hours
 
     def initialize(input)
       @event = input
@@ -74,7 +77,7 @@ module TrafficSpy
         reg_hours = requested_at.strftime("%I:00 %P")
         event_reg_time_hash[reg_hours] += payload_row[:count]
       end
-      event_reg_time_hash
+      event_reg_time_hash.sort_by{|key, value| -value }
     end
   end
 end

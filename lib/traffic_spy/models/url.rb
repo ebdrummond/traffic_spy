@@ -91,9 +91,9 @@ module TrafficSpy
         actual_url_query = urls.where(:id => url_id).to_a
         actual_url = actual_url_query[0][:url]
         response_by_avg[actual_url] += payload_row[:responded_in]
-      end
-      response_by_avg.each_with_index do |(key,value), index|
-        response_by_avg[key] /= account_payloads_count.to_a[index][:count]
+      # end
+      # response_by_avg.each_with_index do |(key,value), index|
+      #   response_by_avg[key] /= account_payloads_count.to_a[index][:count]
       end
       response_by_avg
     end

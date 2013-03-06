@@ -1,4 +1,4 @@
-ENV["TRAFFIC_SPY_ENV"] ||= "test"
+# ENV["TRAFFIC_SPY_ENV"] ||= "test"
 require 'simplecov'
 SimpleCov.start
 require 'traffic_spy'

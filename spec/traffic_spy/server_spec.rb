@@ -155,7 +155,7 @@ module TrafficSpy
           Event.destroy_all
           Account.new("erin", "http://www.erin.com").register
           post '/sources/erin/data', {:payload => @payload_missing_event }
-          get '/sources/erin', {}
+          get '/sources/erin/events', {}
           last_response.status.should eq 403
         end
       end
