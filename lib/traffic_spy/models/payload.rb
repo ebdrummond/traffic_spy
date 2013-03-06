@@ -43,15 +43,20 @@ module TrafficSpy
     end
 
     def self.new?(payload)
-      payloads.where(:requested_at => payload["requestedAt"]).to_a.count < 1
+      payloads.where(:requested_at => payload["requestedAt"]).count < 1
     end
 
     def self.params_missing?(payload)
-      payload.any?{|payload_param| if payload_param[0] != "eventName" then (payload_param[1] == "" || payload_param[1] == nil) end}
+      payload.any? do |payload_param|
+        if payload_param[0] != "eventName"
+          then (payload_param[1] == "" || payload_param[1] == nil)
+        end
+      end
     end
 
     def parse_payload_further
-      @resolution = Resolution.combine_resolutions(@resolution_width, @resolution_height)
+      @resolution = Resolution.combine_resolutions(@resolution_width,
+        @resolution_height)
       user_agent = AgentOrange::UserAgent.new(@user_agent)
       @browser = user_agent.device.engine.browser.name
       @operating_system = user_agent.device.operating_system.name

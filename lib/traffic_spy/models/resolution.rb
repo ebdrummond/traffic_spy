@@ -47,7 +47,10 @@ module TrafficSpy
       account_id = Account.get_id(identifier)
 
       resolution_hash = Hash.new(0)
-      resolution_by_account_id = payloads.where(:account_id => account_id).join(:resolutions, :id => :resolution_id).group_and_count(:resolution_id).order(Sequel.desc(:count))
+      resolution_by_account_id = payloads.where(:account_id => account_id).
+      join(:resolutions, :id => :resolution_id).
+      group_and_count(:resolution_id).order(Sequel.desc(:count))
+
       resolution_by_account_id.to_a.each do |resolution_row|
         resolution_id = resolution_row[:resolution_id]
         actual_resolution_query = resolutions.where(:id => resolution_id).to_a

@@ -1,7 +1,7 @@
 module TrafficSpy
   class ReferringUrl
     attr_reader :referring_url
-    
+
     def initialize(input)
       @referring_url = input
     end
@@ -15,11 +15,13 @@ module TrafficSpy
     end
 
     def self.exists?(referring_url)
-      referring_urls.where(:referring_url => referring_url).to_a.count > 0
+      referring_urls.where(:referring_url => referring_url).count > 0
     end
 
     def self.get_id(referring_url)
-      referring_url_row = referring_urls.where(:referring_url => referring_url).to_a
+      referring_url_row = referring_urls.
+      where(:referring_url => referring_url).to_a
+
       referring_url_id = referring_url_row[0][:id]
     end
 

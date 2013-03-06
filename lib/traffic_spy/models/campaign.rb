@@ -40,7 +40,10 @@ module TrafficSpy
       account_id = Account.get_id(identifier)
 
       campaign_sorted_hash = Hash.new(0)
-      campaign_ids_by_count = payloads.where(:account_id => account_id).join(:campaigns, :id => :campaign_id).group_and_count(:campaign_id).order(Sequel.desc(:count))
+      campaign_ids_by_count = payloads.where(:account_id => account_id).
+      join(:campaigns, :id => :campaign_id).group_and_count(:campaign_id).
+      order(Sequel.desc(:count))
+
       campaign_ids_by_count.to_a.each do |campaign_row|
         campaign_id = campaign_row[:campaign_id]
         actual_campaign_query = DB[:campaigns].where(:id => campaign_id).to_a
