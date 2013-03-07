@@ -68,7 +68,7 @@ module TrafficSpy
 
     it "returns a list of average response times by identifier" do
       url.register
-      expect(Url.average_response_times("james")).to be_kind_of(Hash)
+      expect(Url.average_response_times("james")).to be_kind_of(Array)
     end
   end
 end

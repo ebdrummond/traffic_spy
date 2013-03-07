@@ -316,6 +316,46 @@ module TrafficSpy
       end
     end
 
+    describe "response" do
+      it "returns a 200 status message" do
+        Account.destroy_all
+        Account.new("erin", "http://www.erin.com").register
+        post '/sources/erin/data', {:payload => @payload }
+        get '/sources/erin/response', {}
+        last_response.status.should eq 200
+      end
+    end
+
+    describe "os" do
+      it "returns a 200 status message" do
+        Account.destroy_all
+        Account.new("erin", "http://www.erin.com").register
+        post '/sources/erin/data', {:payload => @payload }
+        get '/sources/erin/os', {}
+        last_response.status.should eq 200
+      end
+    end
+
+    describe "browser" do
+      it "returns a 200 status message" do
+        Account.destroy_all
+        Account.new("erin", "http://www.erin.com").register
+        post '/sources/erin/data', {:payload => @payload }
+        get '/sources/erin/browsers', {}
+        last_response.status.should eq 200
+      end
+    end
+
+    describe "resolutions" do
+      it "returns a 200 status message" do
+        Account.destroy_all
+        Account.new("erin", "http://www.erin.com").register
+        post '/sources/erin/data', {:payload => @payload }
+        get '/sources/erin/resolutions', {}
+        last_response.status.should eq 200
+      end
+    end
+
     it "should load the home page" do
       get '/'
       last_response.should be_ok
