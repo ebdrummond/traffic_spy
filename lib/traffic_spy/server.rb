@@ -52,7 +52,7 @@ module TrafficSpy
       if Payload.params_missing?(payload_hash) == true
         status 400
         body "Sorry, but your request is missing required parameters." +
-        "Please try again."
+        "  Please try again."
       elsif Account.exists?(@identifier) && Payload.new?(payload_hash)
         payload = Payload.new(payload_hash, @identifier)
         payload.register
@@ -64,11 +64,11 @@ module TrafficSpy
       elsif Account.exists?(@identifier) == false
         status 403
         body "This application is not yet registered.  Please register" +
-        "and try again."
+        " and try again."
       end
     end
 
-    get '/sources/:identifier' do
+    get '/sources/:identifier/?' do
       @identifier = params[:identifier]
       if Account.exists?(@identifier)
         @sorted_urls = Url.sorted_urls(@identifier)
@@ -83,7 +83,7 @@ module TrafficSpy
       end
     end
 
-    get '/sources/:identifier/events' do
+    get '/sources/:identifier/events/?' do
       @identifier = params[:identifier]
       if Event.sorted_events(@identifier).all?{|event, count| event == ""}
         status 403
@@ -97,10 +97,11 @@ module TrafficSpy
       end
     end
 
-    get '/sources/:identifier/events/:event_name' do
+    get '/sources/:identifier/events/:event_name/?' do
       @identifier = params[:identifier]
       @event_name = params[:event_name]
-      if Event.sorted_events(@identifier).
+      if Account.exists?(@identifier) && 
+        Event.sorted_events(@identifier).
         any?{|event, count| event == @event_name}
         @reg_times = Event.registration_times(@identifier, @event_name)
         erb :event_details
@@ -109,7 +110,7 @@ module TrafficSpy
       end
     end
 
-    get '/sources/:identifier/urls/*' do
+    get '/sources/:identifier/urls/*/?' do
       @identifier = params[:identifier]
       @path = "/" + params[:splat][0]
       @url_exists = Url.exists?(@path)
@@ -163,7 +164,7 @@ module TrafficSpy
       end
     end
 
-    get '/sources/:identifier/campaigns' do
+    get '/sources/:identifier/campaigns/?' do
       @identifier = params[:identifier]
       if CampaignEvent.any?(@identifier)
         @exists = true
@@ -172,7 +173,7 @@ module TrafficSpy
       erb :campaigns
     end
 
-    get '/sources/:identifier/campaigns/:campaign' do
+    get '/sources/:identifier/campaigns/:campaign/?' do
       @identifier = params[:identifier]
       @campaign = params[:campaign]
       @campaign_events = CampaignEvent.campaign_events(@identifier, @campaign)
