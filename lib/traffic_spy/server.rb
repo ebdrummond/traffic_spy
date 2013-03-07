@@ -71,11 +71,16 @@ module TrafficSpy
     get '/sources/:identifier' do
       @identifier = params[:identifier]
       if Account.exists?(@identifier)
-        @sorted_urls = Url.sorted_urls(@identifier)
-        @browser_breakdown = Browser.breakdown(@identifier)
-        @os_breakdown = OperatingSystem.breakdown(@identifier)
-        @resolution_breakdown = Resolution.breakdown(@identifier)
-        @avg_response_times = Url.average_response_times(@identifier)
+        @sorted_urls =  Hash[Url.sorted_urls(@identifier).
+                        sort_by { |k,v| -v }[0..4]]
+        @browser_breakdown =  Hash[Browser.breakdown(@identifier).
+                              sort_by { |k,v| -v }[0..2]]
+        @os_breakdown = Hash[OperatingSystem.breakdown(@identifier).
+                        sort_by { |k,v| -v }[0..2]]
+        @resolution_breakdown = Hash[Resolution.breakdown(@identifier).
+                                sort_by { |k,v| -v }[0..2]]
+        @avg_response_times = Hash[Url.average_response_times(@identifier).
+                              sort_by { |k,v| -v }[0..2]]
         erb :sources
       else
         status 403
@@ -107,6 +112,36 @@ module TrafficSpy
       else
         erb :event_name_error
       end
+    end
+
+    get '/sources/:identifier/urls' do
+      @identifier = params[:identifier]
+      @sorted_urls = Url.sorted_urls(@identifier)
+      erb :pages
+    end
+
+    get '/sources/:identifier/response' do
+      @identifier = params[:identifier]
+      @avg_response_times = Url.average_response_times(@identifier)
+      erb :response
+    end
+
+    get '/sources/:identifier/browsers' do
+      @identifier = params[:identifier]
+      @browser_breakdown =  Browser.breakdown(@identifier)
+      erb :browser
+    end
+
+    get '/sources/:identifier/os' do
+      @identifier = params[:identifier]
+      @os_breakdown = OperatingSystem.breakdown(@identifier)
+      erb :os
+    end
+
+    get '/sources/:identifier/resolutions' do
+      @identifier = params[:identifier]
+      @resolution_breakdown = Resolution.breakdown(@identifier)
+      erb :resolution
     end
 
     get '/sources/:identifier/urls/*' do

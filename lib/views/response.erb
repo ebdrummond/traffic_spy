@@ -61,7 +61,7 @@
           </a>
         </li>
         <li>
-          <a href="/sources/<%= @identifier %>/response">
+          <a href="/sources/<%= @identifier %>/response" class="active">
             <i class="icon-time"></i>
             Response Times
           </a>
@@ -73,7 +73,7 @@
           </a>
         </li>
         <li>
-          <a href="/sources/<%= @identifier %>/events" class="active">
+          <a href="/sources/<%= @identifier %>/events">
             <i class="icon-group"></i>
             Events
           </a>
@@ -102,35 +102,40 @@
     <div id="content" class="large-10 columns">
       <div id="content-inner">
         <div class="full-table">
-          <h3>Breakdown of registration times by hour of day for <em>"<%= @event_name %>"</em></h3>
-          <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
-            <!-- Table Header -->
-            <thead>
-              <tr>
-                <th>Hour</th>
-                <th>Count</th>
-              </tr>
-            </thead>
-            <!-- Table Header -->
-
-            <!-- Table Body -->
-
-            <tbody>
-              <% @reg_times.each do |reg_times, index| %>
-              <tr>
-                <td><%= reg_times %></td>
-                <td><%= index %></td>
-              </tr>
-              <% end %>
-            </tbody>
-            <!-- Table Body -->
-
-          </table>
+          <h3 class="table-title">Response Times</h3>
         </div>
+        <!-- HERE -->
+        <div class="row">
+          <div class="full-table">
+            <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
+              <!-- Table Header -->
+              <thead>
+                <tr>
+                  <th>URL</th>
+                  <th>Avg. Response</th>
+                </tr>
+              </thead>
+              <!-- Table Header -->
+
+              <!-- Table Body -->
+              <tbody>
+                <% @avg_response_times.each_with_index do |(page, response), index| %>
+                <tr <%= "class='even'" unless index %2 == 0 %>>
+                  <td><%= page %></td>
+                  <td><%= response %>ms</td>
+                </tr><!-- Table Row -->
+                <% end %>
+              </tbody>
+              <!-- Table Body -->
+
+            </table>
+          </div>
+        </div>
+
+        
       </div>
     </div>
   </div>
-
   <script>
   document.write('<script src=' +
   ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
