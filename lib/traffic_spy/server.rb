@@ -115,31 +115,31 @@ module TrafficSpy
       end
     end
 
-    get '/sources/:identifier/urls' do
+    get '/sources/:identifier/urls/?' do
       @identifier = params[:identifier]
       @sorted_urls = Url.sorted_urls(@identifier)
       erb :pages
     end
 
-    get '/sources/:identifier/response' do
+    get '/sources/:identifier/response/?' do
       @identifier = params[:identifier]
       @avg_response_times = Url.average_response_times(@identifier)
       erb :response
     end
 
-    get '/sources/:identifier/browsers' do
+    get '/sources/:identifier/browsers/?' do
       @identifier = params[:identifier]
       @browser_breakdown =  Browser.breakdown(@identifier)
       erb :browser
     end
 
-    get '/sources/:identifier/os' do
+    get '/sources/:identifier/os/?' do
       @identifier = params[:identifier]
       @os_breakdown = OperatingSystem.breakdown(@identifier)
       erb :os
     end
 
-    get '/sources/:identifier/resolutions' do
+    get '/sources/:identifier/resolutions/?' do
       @identifier = params[:identifier]
       @resolution_breakdown = Resolution.breakdown(@identifier)
       erb :resolution
