@@ -11,54 +11,98 @@
   <link rel="stylesheet" href="/css/foundation.css" />
   <link rel="stylesheet" href="/css/font-awesome.css" />
   <link href='http://fonts.googleapis.com/css?family=Quattrocento:700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//cdn.oesmith.co.uk/morris-0.4.1.min.css">
   
 
   <script src="js/vendor/custom.modernizr.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
 
 </head>
 <body>
-  <nav class="top-bar">
-    <ul class="title-area">
-      <!-- Title Area -->
-      <li class="name">
-        <h1><a href="#">le TrafficSpy</a></h1>
-      </li>
-      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
-
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="divider show-for-small"></li>
-        <li class="has-form">
-          <a class="button" href="#"><i class="icon-user"></i>Log In</a>
+  <div id="blank"></div>
+  <div class="fixed">
+    <nav class="top-bar">
+      <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+          <h1><a href="/sources/<%= @identifier %>">le TrafficSpy</a></h1>
         </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
-    </section>
-  </nav>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li class="divider show-for-small"></li>
+          <li class="has-form">
+           <i class="icon-user"></i><%= @identifier %>
+          </li>
+        </ul>
+      </section>
+    </nav>
+  </div>
 
   <div id="main" class="row">
     <div id="sub-nav" class="large-2 columns">
       <ul class="sub-nav">
         <li>
           <a href="/sources/<%= @identifier %>">
-            <i class="icon-dashboard"></i>Dashboard
+            <i class="icon-dashboard"></i>
+            Dashboard
           </a>
         </li>
-        <li><a href="#"><i class="icon-copy"></i>Pages</a></li>
-        <li><a href="#"><i class="icon-time"></i>Response Times</a></li>
-        <li><a href="#" class="active"><i class="icon-money"></i>Campaigns</a></li>
-        <li><a href="#"><i class="icon-group"></i>Events</a></li>
-        <li><a href="#"><i class="icon-cogs"></i>Operating Systems</a></li>
-        <li><a href="#"><i class="icon-laptop"></i>Screen Resolutions</a></li>
+        <li>
+          <a href="/sources/<%= @identifier %>/urls">
+            <i class="icon-copy"></i>
+            Pages
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/response">
+            <i class="icon-time"></i>
+            Response Times
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/campaigns" class="active">
+            <i class="icon-money"></i>
+            Campaigns
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/events">
+            <i class="icon-group"></i>
+            Events
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/browsers">
+            <i class="icon-globe"></i>
+            Browsers
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/os">
+            <i class="icon-cogs"></i>
+            Operating Systems
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/resolutions">
+            <i class="icon-laptop"></i>
+            Screen Resolutions
+          </a>
+        </li>
       </ul>
     </div>
 
     <div id="content" class="large-10 columns">
       <div id="content-inner">
         <div class="full-table">
-          <h3>Events For <em><%= @campaign %></em></h3>
+          <h3>Events For "<em><%= @campaign %></em>"</h3>
           <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
             <!-- Table Header -->
             <thead>

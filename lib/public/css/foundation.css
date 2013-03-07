@@ -1905,6 +1905,7 @@ form.custom {
 
 .top-bar {
   overflow: hidden;
+  z-index: 99;
   height: 55px;
   line-height: 55px;
   position: relative;
@@ -2172,7 +2173,12 @@ form.custom {
     .top-bar-section .has-form {
       background: #111111;
       padding: 0 15px;
-      height: 45px; }
+      height: 45px;
+      color: #ffffff;
+      line-height: 55px;
+      font-size: 1.em;
+      font-family: 'Quattrocento';
+      font-weight:bold; }
     .top-bar-section ul.right li .dropdown {
       left: auto;
       right: 0; }
@@ -3507,7 +3513,7 @@ table tr:hover td {
 
 /* TrafficSpy Additions */
 #main {
-  margin-top: 1.2em;
+  margin-top: 4.7em;
 }
 #content {
   border: 1px solid #d0e0ea;
@@ -3520,6 +3526,7 @@ table tr:hover td {
   margin-bottom: 1.2em;
   background: #f9f9f9;
   box-shadow: 0px 1px 3px #9dacb5;
+  float:right;
 }
 #content-inner {
   margin-top: 1em;
@@ -3527,6 +3534,8 @@ table tr:hover td {
 }
 #sub-nav {
   padding-right: 0;
+  float:left;
+  position:fixed;
 }
 .row .large-10 {
   width: 82.03333%;
@@ -3540,6 +3549,27 @@ table tr:hover td {
   width: 94%;
   float: left;
   margin-left: 2em;
+}
+.table-title{
+  float:left;
+}
+.deeper-link {
+  float:right;
+  font-size:.9em;
+  line-height: 3em;
+}
+.deeper-link a {
+  color: #417fbd;
+}
+.table-icon {
+  margin-left:.5em;
+}
+#pagesChart {
+  clear:both;
+  margin-bottom: 1.2em;
+}
+.morris-hover.morris-default-style {
+  z-index: 1 !important;
 }
 li [class^="icon-"], .nav li [class^="icon-"], li [class*=" icon-"], .nav li [class*=" icon-"] {
   margin-right: .5em;

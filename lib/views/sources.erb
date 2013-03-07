@@ -11,58 +11,109 @@
   <link rel="stylesheet" href="/css/foundation.css" />
   <link rel="stylesheet" href="/css/font-awesome.css" />
   <link href='http://fonts.googleapis.com/css?family=Quattrocento:700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//cdn.oesmith.co.uk/morris-0.4.1.min.css">
   
 
   <script src="js/vendor/custom.modernizr.js"></script>
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
 
 </head>
 <body>
   <div id="blank"></div>
-  <nav class="top-bar">
-    <ul class="title-area">
-      <!-- Title Area -->
-      <li class="name">
-        <h1><a href="#">le TrafficSpy</a></h1>
-      </li>
-      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
-
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="divider show-for-small"></li>
-        <li class="has-form">
-          <a class="button" href="#"><i class="icon-user"></i>Log In</a>
+  <div class="fixed">
+    <nav class="top-bar">
+      <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+          <h1><a href="/sources/<%= @identifier %>">le TrafficSpy</a></h1>
         </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
-    </section>
-  </nav>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li class="divider show-for-small"></li>
+          <li class="has-form">
+           <i class="icon-user"></i><%= @identifier %>
+          </li>
+        </ul>
+      </section>
+    </nav>
+  </div>
 
   <div id="main" class="row">
     <div id="sub-nav" class="large-2 columns">
       <ul class="sub-nav">
         <li>
           <a href="/sources/<%= @identifier %>" class="active">
-            <i class="icon-dashboard"></i>Dashboard
+            <i class="icon-dashboard"></i>
+            Dashboard
           </a>
         </li>
-        <li><a href="#"><i class="icon-copy"></i>Pages</a></li>
-        <li><a href="#"><i class="icon-time"></i>Response Times</a></li>
-        <li><a href="/sources/<%= @identifier %>/campaigns"><i class="icon-money"></i>Campaigns</a></li>
-        <li><a href="/sources/<%= @identifier %>/events"><i class="icon-group"></i>Events</a></li>
-        <li><a href="#"><i class="icon-cogs"></i>Browsers</a></li>
-        <li><a href="#"><i class="icon-cogs"></i>Operating Systems</a></li>
-        <li><a href="#"><i class="icon-laptop"></i>Screen Resolutions</a></li>
+        <li>
+          <a href="/sources/<%= @identifier %>/urls">
+            <i class="icon-copy"></i>
+            Pages
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/response">
+            <i class="icon-time"></i>
+            Response Times
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/campaigns">
+            <i class="icon-money"></i>
+            Campaigns
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/events">
+            <i class="icon-group"></i>
+            Events
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/browsers">
+            <i class="icon-globe"></i>
+            Browsers
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/os">
+            <i class="icon-cogs"></i>
+            Operating Systems
+          </a>
+        </li>
+        <li>
+          <a href="/sources/<%= @identifier %>/resolutions">
+            <i class="icon-laptop"></i>
+            Screen Resolutions
+          </a>
+        </li>
       </ul>
     </div>
 
     <div id="content" class="large-10 columns">
       <div id="content-inner">
+        <div class="full-table">
+          <h3 class="table-title">Top Pages</h3>
+          <h4 class="deeper-link">
+            <a href="/sources/<%= @identifier %>/urls">
+              View All
+              <i class="icon-th-list table-icon"></i>
+            </a>
+          </h4>
+          <div id="pagesChart" style="height: 250px;"></div>
+        </div>
+        <!-- HERE -->
         <div class="row">
           <div class="full-table">
-            <h3>Pages</h3>
             <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
               <!-- Table Header -->
               <thead>
@@ -90,7 +141,13 @@
 
         <div class="row">
           <div class="widget">
-            <h3>Browsers</h3>
+            <h3 class="table-title">Browsers</h3>
+            <h4 class="deeper-link">
+              <a href="/sources/<%= @identifier %>/browsers">
+                View All
+                <i class="icon-th-list table-icon"></i>
+              </a>
+            </h4>
             <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
               <!-- Table Header -->
               <thead>
@@ -117,7 +174,13 @@
           </div>
 
           <div class="widget">
-            <h3>Operating Systems</h3>
+            <h3 class="table-title">Operating Systems</h3>
+              <h4 class="deeper-link">
+              <a href="/sources/<%= @identifier %>/os">
+                View All
+                <i class="icon-th-list table-icon"></i>
+              </a>
+            </h4>
             <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
               <!-- Table Header -->
               <thead>
@@ -145,7 +208,13 @@
         </div>
         <div class="row">
           <div class="widget">
-            <h3>Screen Resolutions</h3>
+            <h3 class="table-title">Screen Resolutions</h3>
+            <h4 class="deeper-link">
+              <a href="/sources/<%= @identifier %>/resolutions">
+                View All
+                <i class="icon-th-list table-icon"></i>
+              </a>
+            </h4>
             <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
               <!-- Table Header -->
               <thead>
@@ -172,7 +241,13 @@
           </div>
 
           <div class="widget">
-            <h3>Response Times</h3>
+            <h3 class="table-title">Response Times</h3>
+            <h4 class="deeper-link">
+            <a href="/sources/<%= @identifier %>/response">
+              View All
+              <i class="icon-th-list table-icon"></i>
+            </a>
+          </h4>
             <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
               <!-- Table Header -->
               <thead>
@@ -187,7 +262,6 @@
               <tbody>
                 <% @avg_response_times.each do |page, response| %>
                 <tr>
-                 <!--  <td><a href="#">http://jumpstartlab.com/ohyeah</a></td> -->
                   <td><%= page %></td>
                   <td><%= response %>ms</td>
                 </tr><!-- Table Row -->
@@ -201,7 +275,6 @@
       </div>
     </div>
   </div>
-
   <script>
   document.write('<script src=' +
   ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
@@ -243,6 +316,31 @@
   
   <script>
     $(document).foundation();
+  </script>
+  <script>
+    new Morris.Bar({
+    // ID of the element in which to draw the chart.
+    element: 'pagesChart',
+    // Chart data records -- each entry in this array corresponds to a point on
+    // the chart.
+    data: [
+    <% @sorted_urls.each_with_index do |(url, count), index| %>
+      <% if index == 4 %> 
+        { year: String('<%= url %>'), value: String('<%= count %>') }
+      <% else %>
+        { year: String('<%= url %>'), value: String('<%= count %>') },
+      <% end %>
+    <% end %>
+    ],
+    // The name of the data record attribute that contains x-values.
+    xkey: 'year',
+    barColors: ['#9dacb5'],
+    // A list of names of data record attributes that contain y-values.
+    ykeys: ['value'],
+    // Labels for the ykeys -- will be displayed when you hover over the
+    // chart.
+    labels: ['Value']
+  });
   </script>
 </body>
 </html>
