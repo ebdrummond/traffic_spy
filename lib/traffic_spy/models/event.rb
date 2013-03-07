@@ -52,7 +52,7 @@ module TrafficSpy
       event_sorted_hash = Hash.new(0)
       event_ids_by_count = payloads.where(:account_id => account_id).
       join(:events, :id => :event_id).group_and_count(:event_id).
-      order(Sequel.desc(:count))
+      order(Sequel.desc(:count)).exclude(:event => "")
 
       event_ids_by_count.to_a.each do |event_row|
         event_id = event_row[:event_id]

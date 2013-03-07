@@ -1,6 +1,6 @@
 # TrafficSpy
 
-TODO: Write a gem description
+After downloading our files, please run a db reset and migrate prior to running this code.  Danke!
 
 ## Installation
 

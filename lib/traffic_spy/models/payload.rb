@@ -107,7 +107,7 @@ module TrafficSpy
 
       DB[:payloads].insert(
       :account_id => generate_account_id,
-      :http_request => @http_request,
+      :http_request => @request_type,
       :query_strings => @query_strings,
       :url_id => generate_url_id,
       :referrer_id => generate_referring_url_id,

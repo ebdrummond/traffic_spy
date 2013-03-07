@@ -54,6 +54,7 @@ module TrafficSpy
 
       url_sorted_hash = Hash.new{0}
       url_ids_by_count = payloads.where(:account_id => account_id).
+      where(:http_request => "GET").
       join(:urls, :id => :url_id).group_and_count(:url_id).
       order(Sequel.desc(:count))
 
