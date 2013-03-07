@@ -56,7 +56,7 @@ module TrafficSpy
       it "parses the 'problem' objects in the payload" do
         parse_to_ruby = Payload.parse(@payload)
         payload = Payload.new(parse_to_ruby, "jumpstartlab")
-        expect(payload.parse_payload_further).to eq "Mac OS X"
+        expect(payload.parse_payload_further).to eq "Macintosh"
       end
 
       it "creates a new account object" do

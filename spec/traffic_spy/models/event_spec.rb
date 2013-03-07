@@ -68,7 +68,7 @@ module TrafficSpy
 
     it "returns a list of event registration times by hour" do
       expect(Event.registration_times("jean-luc", "socialLogin")).
-      to eq({"09:00 pm"=>1})
+      to eq([["09:00 pm", 1]])
     end
   end
 end

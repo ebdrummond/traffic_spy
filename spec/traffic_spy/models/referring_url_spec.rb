@@ -24,7 +24,8 @@ module TrafficSpy
     end
 
     it "makes a new object with a value that already exists" do
-      expect(ReferringUrl.make_new_object("http://dax.com")).to be_kind_of(Integer)
+      expect(ReferringUrl.make_new_object("http://dax.com")).
+      to be_kind_of(Integer)
     end
 
     it "returns the id of the row in the table" do
